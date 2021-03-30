@@ -11,7 +11,15 @@
 NAME = morphosis
 
 SRC_DIR = ./srcs/
-SRC = 	main.c
+SRC = 	main.c \
+		cleanup.c \
+		init.c \
+		errors.c \
+		gl_draw.c \
+		gl_utils.c \
+		gl_buffers.c \
+		gl_build.c \
+		gl_points.c
 
 SRCS = $(addprefix $(SRC_DIR), $(SRC))
 
@@ -23,7 +31,8 @@ INCS = $(addprefix $(INC_DIR), $(INC))
 INC_DIR = ./includes/
 INC = 	morphosis.h \
 		gl_includes.h \
-		stb_image.h
+		stb_image.h \
+		errors.h
 
 LIB_OBJS = $(addprefix $(LIB_OBJ_DIR), $(LIB_OBJ))
 LIB_OBJ = *.o

@@ -8,11 +8,13 @@
 /*                                     */
 /* *********************************** */
 
-#version 150 core
+#ifndef _MORPHOSIS_ERRORS_H
+# define _MORPHOSIS_ERRORS_H
 
-out vec4                color;
+# define MALLOC_FAIL_ERR 1
+# define OPEN_FILE_ERR 2
 
-void                    main()
-{
-    color = vec4(1.0f, 0.0f, 0.0f, 1.0f);
-}
+# define MALLOC_FAIL "ERROR: Could not allocate memory\n"
+# define OPEN_FILE "ERROR: Could not open the file\n"
+
+#endif

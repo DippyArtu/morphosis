@@ -8,11 +8,17 @@
 /*                                     */
 /* *********************************** */
 
-#version 150 core
+#include "morphosis.h"
 
-out vec4                color;
-
-void                    main()
+void 						createVBO(t_gl *gl, GLsizeiptr size, GLfloat *points)
 {
-    color = vec4(1.0f, 0.0f, 0.0f, 1.0f);
+	glGenBuffers(1, &gl->vbo);
+	glBindBuffer(GL_ARRAY_BUFFER, gl->vbo);
+	glBufferData(GL_ARRAY_BUFFER, size, points, GL_STATIC_DRAW);
+}
+
+void						createVAO(t_gl *gl)
+{
+	glGenVertexArrays(1, &gl->vao);
+	glBindVertexArray(gl->vao);
 }

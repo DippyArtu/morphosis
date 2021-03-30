@@ -8,11 +8,14 @@
 /*                                     */
 /* *********************************** */
 
-#version 150 core
+#include "morphosis.h"
 
-out vec4                color;
-
-void                    main()
+void 						error(int errno, t_gl *gl)
 {
-    color = vec4(1.0f, 0.0f, 0.0f, 1.0f);
+	if (errno == MALLOC_FAIL_ERR)
+		printf(MALLOC_FAIL);
+	else if (errno == OPEN_FILE_ERR)
+		printf(OPEN_FILE);
+	clean_up(gl);
+	exit(1);
 }

@@ -8,11 +8,13 @@
 /*                                     */
 /* *********************************** */
 
-#version 150 core
+#include "morphosis.h"
 
-out vec4                color;
-
-void                    main()
+void						gl_set_attrib_ptr(t_gl *gl, char *attrib_name, GLint num_vals, int stride, int offset)
 {
-    color = vec4(1.0f, 0.0f, 0.0f, 1.0f);
+	GLuint 					attrib;
+
+	attrib = glGetAttribLocation(gl->shaderProgram, attrib_name);
+	glVertexAttribPointer(attrib, num_vals, GL_FLOAT, GL_FALSE, stride * sizeof(float), (void *)(offset * sizeof(float)));
+	glEnableVertexAttribArray(attrib);
 }

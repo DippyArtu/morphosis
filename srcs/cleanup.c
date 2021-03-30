@@ -8,11 +8,14 @@
 /*                                     */
 /* *********************************** */
 
-#version 150 core
+#include "morphosis.h"
 
-out vec4                color;
-
-void                    main()
+void 						clean_up(t_gl *gl)
 {
-    color = vec4(1.0f, 0.0f, 0.0f, 1.0f);
+	if (gl)
+	{
+		if (gl->points != NULL)
+			free(gl->points);
+		free(gl);
+	}
 }

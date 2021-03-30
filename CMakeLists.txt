@@ -92,8 +92,18 @@ add_executable(morphosis
         includes/morphosis.h
         includes/gl_includes.h
         includes/stb_image.h
+        includes/errors.h
 
         srcs/main.c
+        srcs/init.c
+        srcs/cleanup.c
+        srcs/errors.c
+
+        srcs/gl_draw.c
+        srcs/gl_utils.c
+        srcs/gl_buffers.c
+        srcs/gl_build.c
+        srcs/gl_points.c
         )
 
 target_link_libraries(morphosis ${GLFW_LIB} ${GLEW_LIB})
