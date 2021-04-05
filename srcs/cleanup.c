@@ -10,12 +10,39 @@
 
 #include "morphosis.h"
 
-void 						clean_up(t_gl *gl)
+void 						clean_fract(t_fract *fract)
 {
-	if (gl)
+	if (!fract)
+		return;
+	if (fract->julia)
+		free(fract->julia);
+	if (fract->grid.x)
+		free(fract->grid.x);
+	if (fract->grid.y)
+		free(fract->grid.y);
+	if (fract->grid.z)
+		free(fract->grid.z);
+	if (fract->coord.dx)
+		free(fract->coord.dx);
+	if (fract->coord.dy)
+		free(fract->coord.dy);
+	if (fract->coord.dz)
+		free(fract->coord.dz);
+	free(fract);
+}
+
+void 						clean_up(t_data *data)
+{
+	if (data)
 	{
-		if (gl->points != NULL)
-			free(gl->points);
-		free(gl);
+		if (data->gl)
+		{
+			if (data->gl->points)
+				free(data->gl->points);
+			free(data->gl);
+		}
+		if (data->fract)
+			clean_fract(data->fract);
+		free(data);
 	}
 }

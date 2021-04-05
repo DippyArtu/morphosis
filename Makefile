@@ -15,14 +15,16 @@ SRC = 	main.c \
 		cleanup.c \
 		init.c \
 		errors.c \
+		point_cloud.c \
+		lib_complex.c \
+		\
 		gl_draw.c \
-		gl_utils.c \
-		gl_buffers.c \
-		gl_build.c \
-		gl_points.c
+        gl_utils.c \
+        gl_buffers.c \
+        gl_build.c \
+        gl_points.c
 
 SRCS = $(addprefix $(SRC_DIR), $(SRC))
-
 OBJS = $(addprefix $(OBJ_DIR), $(OBJ))
 OBJ_DIR = ./obj/
 OBJ = $(SRC:.c=.o)
@@ -32,7 +34,9 @@ INC_DIR = ./includes/
 INC = 	morphosis.h \
 		gl_includes.h \
 		stb_image.h \
-		errors.h
+		errors.h \
+		lib_complex.h \
+		structures.h
 
 LIB_OBJS = $(addprefix $(LIB_OBJ_DIR), $(LIB_OBJ))
 LIB_OBJ = *.o
@@ -47,13 +51,12 @@ GL_LIBS = -framework OpenGL -I/usr/local/include -lGLEW -lglfw
 
 all: $(NAME)
 
-$(NAME): $(OBJ_DIR) $(LIB_OBJS) $(HASH_OBJS) $(OBJS)
+$(NAME): $(OBJ_DIR) $(LIB_OBJS) $(OBJS)
 		clang $(OBJS) ./libft/libft.a -o $(NAME) $(GL_LIBS)
 
 $(OBJ_DIR):
 		mkdir -p $@
 		@mkdir -p $(LIB_OBJ_DIR)
-		@mkdir -p $(HASH_OBJ_DIR)
 
 $(LIB_OBJ_DIR)%.o: $(LIB_SRC_DIR)%.c $(LIB_INCS)
 		@make -C libft

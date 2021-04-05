@@ -10,12 +10,14 @@
 
 #include "morphosis.h"
 
-void 						error(int errno, t_data *data)
+//TODO grid and coord calculations —> get bounding cube
+
+void 						calculate_julia_cloud(t_data *data)
 {
-	if (errno == MALLOC_FAIL_ERR)
-		printf(MALLOC_FAIL);
-	else if (errno == OPEN_FILE_ERR)
-		printf(OPEN_FILE);
-	clean_up(data);
-	exit(1);
+	t_fract 				*fract;
+
+	fract = data->fract;
+	fract->grid_size = fract->grid_length / fract->step_size;
+	init_grid(data);
 }
+

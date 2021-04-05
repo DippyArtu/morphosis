@@ -93,11 +93,15 @@ add_executable(morphosis
         includes/gl_includes.h
         includes/stb_image.h
         includes/errors.h
+        includes/lib_complex.h
+        includes/structures.h
 
         srcs/main.c
         srcs/init.c
         srcs/cleanup.c
         srcs/errors.c
+        srcs/point_cloud.c
+        srcs/lib_complex.c
 
         srcs/gl_draw.c
         srcs/gl_utils.c

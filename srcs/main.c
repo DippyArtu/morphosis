@@ -26,15 +26,18 @@ int 						main(void)
 		-0.5f, -0.5f  // Vertex 3 (X, Y)
 	};
 
-	t_gl 					*gl;
+	t_data 					*data;
 
-	gl = init_gl_struct();
+	data = init_data();
 
-	gl->points = (float *)malloc(sizeof(vertices));
-	memcpy(gl->points, vertices, sizeof(vertices));
-	gl->num_points = 3;
+	calculate_julia_cloud(data);
+	exit(0);
 
-	run_graphics(gl);
-	clean_up(gl);
+	data->gl->points = (float *)malloc(sizeof(vertices));
+	memcpy(data->gl->points, vertices, sizeof(vertices));
+	data->gl->num_points = 3;
+
+	run_graphics(data->gl);
+	clean_up(data);
 	return 0;
 }
