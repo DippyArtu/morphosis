@@ -42,5 +42,7 @@ void 						clean_up(t_data *data);
 
 //---------------------------------------------------------------------------------------------------------------------- point_cloud.c
 void 						calculate_julia_cloud(t_data *data);
+void						process_grid(t_data *data);
+void 						subdiv_grid(float start, float stop, float step, float *axis);
 
 #endif

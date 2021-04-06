@@ -94,10 +94,16 @@ void						init_grid(t_data *data)
 	t_fract 				*f;
 
 	f = data->fract;
-	if (!(f->grid.x = (float *)malloc((size_t)f->grid_size * sizeof(float))))
+	if (!(f->grid.x = (float *)malloc(((size_t)f->grid_size + 1) * sizeof(float))))
 		error(MALLOC_FAIL_ERR, data);
-	if (!(f->grid.y = (float *)malloc((size_t)f->grid_size * sizeof(float))))
+//	for (int x = 0; x < f->grid_size; x++)
+//		f->grid.x[x] = 0.0f;
+	if (!(f->grid.y = (float *)malloc(((size_t)f->grid_size + 1) * sizeof(float))))
 		error(MALLOC_FAIL_ERR, data);
-	if (!(f->grid.z = (float *)malloc((size_t)f->grid_size * sizeof(float))))
+//	for (int y = 0; y < f->grid_size; y++)
+//		f->grid.y[y] = 0.0f;
+	if (!(f->grid.z = (float *)malloc(((size_t)f->grid_size + 1) * sizeof(float))))
 		error(MALLOC_FAIL_ERR, data);
+//	for (int z = 0; z < f->grid_size; z++)
+//		f->grid.z[z] = 0.0f;
 }
