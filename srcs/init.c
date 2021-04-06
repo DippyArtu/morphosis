@@ -93,9 +93,9 @@ void						init_vertex(t_data *data)
 	size_t 					size;
 
 	size = data->fract->grid_size * 3;
-	if (!(data->vertexpos = (float3 *)malloc(size * sizeof(float3))))
+	if (!(data->vertexpos = (float3 *)malloc(8 * size * sizeof(float3))))
 		error(MALLOC_FAIL_ERR, data);
-	if (!(data->vertexval = (float *)malloc(size * sizeof(float))))
+	if (!(data->vertexval = (float *)malloc(8 * size * sizeof(float))))
 		error(MALLOC_FAIL_ERR, data);
 }
 
