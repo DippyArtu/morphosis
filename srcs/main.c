@@ -30,7 +30,7 @@ int 						main(void)
 
 	data = init_data();
 
-	calculate_julia_cloud(data);
+	calculate_point_cloud(data);
 	exit(0);
 
 	data->gl->points = (float *)malloc(sizeof(vertices));

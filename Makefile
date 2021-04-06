@@ -16,13 +16,15 @@ SRC = 	main.c \
 		init.c \
 		errors.c \
 		point_cloud.c \
-		lib_complex.c \
+		calculate_julia.c \
 		\
 		gl_draw.c \
         gl_utils.c \
         gl_buffers.c \
         gl_build.c \
-        gl_points.c
+        gl_points.c \
+        \
+        lib_complex.c
 
 SRCS = $(addprefix $(SRC_DIR), $(SRC))
 OBJS = $(addprefix $(OBJ_DIR), $(OBJ))

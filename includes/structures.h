@@ -29,12 +29,12 @@ typedef struct 				s_grid
 	float 					*z;
 }							t_grid;
 
-typedef struct 				s_coord
+typedef struct 				s_voxel
 {
-	float 					*dx;
-	float 					*dy;
-	float 					*dz;
-}							t_coord;
+	float 					dx;
+	float 					dy;
+	float 					dz;
+}							t_voxel;
 
 typedef struct				s_fract
 {
@@ -46,7 +46,7 @@ typedef struct				s_fract
 
 	t_julia 				*julia;
 	t_grid 					grid;
-	t_coord 				coord;
+	t_voxel 				voxel[8];
 }							t_fract;
 
 #endif

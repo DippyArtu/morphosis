@@ -101,6 +101,8 @@ add_executable(morphosis
         srcs/cleanup.c
         srcs/errors.c
         srcs/point_cloud.c
+        srcs/calculate_julia.c
+
         srcs/lib_complex.c
 
         srcs/gl_draw.c

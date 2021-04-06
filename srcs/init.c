@@ -48,9 +48,6 @@ t_fract						*init_fract(void)
 	fract->grid.x = NULL;
 	fract->grid.y = NULL;
 	fract->grid.z = NULL;
-	fract->coord.dx = NULL;
-	fract->coord.dy = NULL;
-	fract->coord.dz = NULL;
 
 	fract->step_size = 0.05f;
 
@@ -86,7 +83,20 @@ t_data						*init_data(void)
 		error(MALLOC_FAIL_ERR, NULL);
 	data->gl = init_gl_struct();
 	data->fract = init_fract();
+	data->vertexpos = NULL;
+	data->vertexval = NULL;
 	return data;
+}
+
+void						init_vertex(t_data *data)
+{
+	size_t 					size;
+
+	size = data->fract->grid_size * 3;
+	if (!(data->vertexpos = (float3 *)malloc(size * sizeof(float3))))
+		error(MALLOC_FAIL_ERR, data);
+	if (!(data->vertexval = (float *)malloc(size * sizeof(float))))
+		error(MALLOC_FAIL_ERR, data);
 }
 
 void						init_grid(t_data *data)
@@ -96,14 +106,8 @@ void						init_grid(t_data *data)
 	f = data->fract;
 	if (!(f->grid.x = (float *)malloc(((size_t)f->grid_size + 1) * sizeof(float))))
 		error(MALLOC_FAIL_ERR, data);
-//	for (int x = 0; x < f->grid_size; x++)
-//		f->grid.x[x] = 0.0f;
 	if (!(f->grid.y = (float *)malloc(((size_t)f->grid_size + 1) * sizeof(float))))
 		error(MALLOC_FAIL_ERR, data);
-//	for (int y = 0; y < f->grid_size; y++)
-//		f->grid.y[y] = 0.0f;
 	if (!(f->grid.z = (float *)malloc(((size_t)f->grid_size + 1) * sizeof(float))))
 		error(MALLOC_FAIL_ERR, data);
-//	for (int z = 0; z < f->grid_size; z++)
-//		f->grid.z[z] = 0.0f;
 }

@@ -22,12 +22,6 @@ void 						clean_fract(t_fract *fract)
 		free(fract->grid.y);
 	if (fract->grid.z)
 		free(fract->grid.z);
-	if (fract->coord.dx)
-		free(fract->coord.dx);
-	if (fract->coord.dy)
-		free(fract->coord.dy);
-	if (fract->coord.dz)
-		free(fract->coord.dz);
 	free(fract);
 }
 
@@ -43,6 +37,10 @@ void 						clean_up(t_data *data)
 		}
 		if (data->fract)
 			clean_fract(data->fract);
+		if (data->vertexpos)
+			free(data->vertexpos);
+		if (data->vertexval)
+			free(data->vertexval);
 		free(data);
 	}
 }

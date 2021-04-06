@@ -24,6 +24,8 @@ typedef struct 				s_data
 {
 	t_gl					*gl;
 	t_fract 				*fract;
+	float3 					*vertexpos;
+	float					*vertexval;
 }							t_data;
 
 
@@ -33,6 +35,7 @@ t_gl						*init_gl_struct(void);
 t_julia 					*init_julia(void);
 t_fract						*init_fract(void);
 void						init_grid(t_data *data);
+void						init_vertex(t_data *data);
 
 //---------------------------------------------------------------------------------------------------------------------- errors.c
 void 						error(int errno, t_data *data);
@@ -41,8 +44,12 @@ void 						error(int errno, t_data *data);
 void 						clean_up(t_data *data);
 
 //---------------------------------------------------------------------------------------------------------------------- point_cloud.c
-void 						calculate_julia_cloud(t_data *data);
-void						process_grid(t_data *data);
+void 						calculate_point_cloud(t_data *data);
+void						create_grid(t_data *data);
 void 						subdiv_grid(float start, float stop, float step, float *axis);
+void						define_voxel(t_fract *fract, float s);
+
+//---------------------------------------------------------------------------------------------------------------------- calculate_julia.c
+void						calculate_julia(t_data *data);
 
 #endif
