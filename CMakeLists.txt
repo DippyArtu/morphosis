@@ -111,6 +111,7 @@ add_executable(morphosis
         srcs/gl_buffers.c
         srcs/gl_build.c
         srcs/gl_points.c
+        srcs/gl_init.c
         )
 
 target_link_libraries(morphosis ${GLFW_LIB} ${GLEW_LIB})

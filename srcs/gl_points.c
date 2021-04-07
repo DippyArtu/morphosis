@@ -10,6 +10,28 @@
 
 #include "morphosis.h"
 
+void						gl_retrieve_points(t_data *data)
+{
+	uint					i;
+	uint 					j;
+	float 					*pts;
+
+	i = 0;
+	j = 0;
+	gl_init_points(data, data->gl->num_points);
+	pts = data->gl->points;
+	while (data->vertexval[i])
+	{
+		if (data->vertexval[i] == 1.0f)
+		{
+			pts[j++] = data->vertexpos[i].x;
+			pts[j++] = data->vertexpos[i].y;
+			pts[j++] = data->vertexpos[i].z;
+		}
+		i++;
+	}
+}
+
 void						gl_set_attrib_ptr(t_gl *gl, char *attrib_name, GLint num_vals, int stride, int offset)
 {
 	GLuint 					attrib;

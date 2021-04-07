@@ -24,6 +24,7 @@ SRC = 	main.c \
         gl_buffers.c \
         gl_build.c \
         gl_points.c \
+        gl_init.c \
         \
         lib_complex.c
 

@@ -13,6 +13,21 @@
 
 # include <lib_complex.h>
 
+typedef struct 				s_gl
+{
+	GLFWwindow 				*window; //---------------------------------------------------------------------------------GL context window
+
+	GLuint 					vertexShader;
+	GLuint 					fragmentShader;
+	GLuint					shaderProgram;
+
+	GLuint 					vbo;
+	GLuint 					vao;
+
+	float 					*points;
+	uint					num_points;
+}							t_gl;
+
 typedef struct 				s_julia
 {
 	uint					max_iter;
@@ -47,5 +62,13 @@ typedef struct				s_fract
 	t_grid 					grid;
 	t_voxel 				voxel[8];
 }							t_fract;
+
+typedef struct 				s_data
+{
+	t_gl					*gl;
+	t_fract 				*fract;
+	float3 					*vertexpos;
+	float					*vertexval;
+}							t_data;
 
 #endif

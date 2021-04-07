@@ -30,8 +30,8 @@ void						build_fractal(t_data *data)
 					data->vertexpos[i].y = f->grid.y[y] + f->voxel[c].dy;
 					data->vertexpos[i].z = f->grid.z[z] + f->voxel[c].dz;
 					data->vertexval[i] = sample_4D_Julia(f->julia, data->vertexpos[i]);
-//					if (data->vertexval[i] == 1)
-//						printf("%zu:    %.1f\n", i, data->vertexval[i]);
+					if (data->vertexval[i] == 1)
+						data->gl->num_points++;
 					i++;
 				}
 			}

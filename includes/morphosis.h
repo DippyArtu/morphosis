@@ -18,15 +18,6 @@
 # include <libft.h>
 # include <gl_includes.h>
 # include <errors.h>
-# include <structures.h>
-
-typedef struct 				s_data
-{
-	t_gl					*gl;
-	t_fract 				*fract;
-	float3 					*vertexpos;
-	float					*vertexval;
-}							t_data;
 
 
 //---------------------------------------------------------------------------------------------------------------------- init.c
