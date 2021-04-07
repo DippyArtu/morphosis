@@ -20,7 +20,7 @@ void 						calculate_point_cloud(t_data *data)
 	init_vertex(data);
 	create_grid(data);
 	define_voxel(fract, fract->step_size);
-	calculate_julia(data);
+	build_fractal(data);
 }
 
 void						create_grid(t_data *data)

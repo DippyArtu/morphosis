@@ -18,6 +18,7 @@
 
 #include "morphosis.h"
 
+//TODO check out the cloud on GL
 int 						main(void)
 {
 	float vertices[] = {

@@ -26,11 +26,13 @@
 # endif
 
 # if defined(DOUBLE_SUPPORT_AVAILABLE)
- typedef double2	cl_complex;
- typedef double		TYPE;
+ typedef double2		cl_complex;
+ typedef cl_double4 	cl_quat;
+ typedef double			TYPE;
 # else
- typedef float2		cl_complex;
- typedef float		TYPE;
+ typedef float2			cl_complex;
+ typedef float4			cl_quat;
+ typedef float			TYPE;
 # endif
 
 # define I_cl ((cl_complex)(0.0, 1.0))
@@ -49,5 +51,9 @@ cl_complex 		cl_csqrt(cl_complex n);
 cl_complex 		cl_cexp(cl_complex n);
 cl_complex 		cl_clog(cl_complex z);
 TYPE			cl_cdot(cl_complex a, cl_complex b);
+cl_quat			cl_quat_mult(cl_quat q1, cl_quat q2);
+cl_quat 		cl_quat_sum(cl_quat q1, cl_quat q2);
+cl_quat 		cl_quat_conjugate(cl_quat q);
+TYPE 			cl_quat_mod(cl_quat q);
 
 #endif

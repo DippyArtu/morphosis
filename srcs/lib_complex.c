@@ -155,3 +155,61 @@ cl_complex 		cl_clog(const cl_complex z)
 	res.y = cl_carg(z);
 	return(res);
 }
+
+
+/*
+ * Returns the product of 2 quaternions
+ */
+cl_quat			cl_quat_mult(cl_quat q1, cl_quat q2)
+{
+	cl_quat 	res;
+
+	res.x = (q1.x * q2.x) - (q1.y * q2.y) - (q1.z * q2.z) - (q1.w * q2.w);
+	res.y = (q1.x * q2.y) + (q1.y * q2.x) + (q1.z * q2.w) - (q1.w * q2.z);
+	res.z = (q1.x * q2.z) + (q1.z * q2.x) + (q1.w * q2.y) - (q1.y * q2.w);
+	res.w = (q1.x * q1.w) + (q1.w * q2.x) + (q1.y * q2.z) - (q1.z * q2.y);
+	return res;
+}
+
+/*
+ * Returns the sum of 2 quaternions
+ */
+cl_quat 		cl_quat_sum(cl_quat q1, cl_quat q2)
+{
+	cl_quat 	res;
+
+	res.x = q1.x + q2.x;
+	res.y = q1.y + q2.y;
+	res.z = q1.z + q2.z;
+	res.w = q1.w + q2.w;
+	return res;
+}
+
+/*
+ * Returns the conjugate of a quaternion
+ *
+ * The conjugate of a quaternion number is a quaternion
+ * with the same magnitudes but with the sign of the imaginary parts inverted
+ */
+cl_quat 		cl_quat_conjugate(cl_quat q)
+{
+	cl_quat 	res;
+
+	res.x = q.x;
+	res.y = -1 * q.y;
+	res.z = -1 * q.z;
+	res.w = -1 * q.w;
+	return res;
+}
+
+/*
+ * Returns modulus of quaternion (its length):
+ */
+TYPE 			cl_quat_mod(cl_quat q)
+{
+	cl_quat 	tmp;
+
+	tmp = cl_quat_conjugate(q);
+	tmp = cl_quat_mult(q, tmp);
+	return (sqrt((TYPE)((tmp.x * tmp.x) + (tmp.y * tmp.y) + (tmp.z * tmp.z) + (tmp.w * tmp.w))));
+}

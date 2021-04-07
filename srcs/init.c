@@ -62,7 +62,6 @@ t_julia 					*init_julia(void)
 	if (!(julia = (t_julia *)malloc(sizeof(t_julia))))
 		error(MALLOC_FAIL_ERR, NULL);
 
-	julia->n_iter = 0;
 	julia->max_iter = 6;
 	julia->threshold = 2.0f;
 	julia->w = 0.0f;

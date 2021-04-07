@@ -49,7 +49,10 @@ void						create_grid(t_data *data);
 void 						subdiv_grid(float start, float stop, float step, float *axis);
 void						define_voxel(t_fract *fract, float s);
 
-//---------------------------------------------------------------------------------------------------------------------- calculate_julia.c
-void						calculate_julia(t_data *data);
+//---------------------------------------------------------------------------------------------------------------------- build_fractal.c
+void						build_fractal(t_data *data);
+
+//---------------------------------------------------------------------------------------------------------------------- sample_julia.c
+float 						sample_4D_Julia(t_julia *julia, float3 pos);
 
 #endif

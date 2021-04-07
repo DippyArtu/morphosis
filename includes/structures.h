@@ -15,11 +15,10 @@
 
 typedef struct 				s_julia
 {
-	int 					n_iter;
-	int						max_iter;
+	uint					max_iter;
 	float 					threshold;
 	float 					w;
-	float4 					c;
+	cl_quat 				c;
 }							t_julia;
 
 typedef struct 				s_grid

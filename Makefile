@@ -16,7 +16,8 @@ SRC = 	main.c \
 		init.c \
 		errors.c \
 		point_cloud.c \
-		calculate_julia.c \
+		build_fractal.c \
+		sample_julia.c \
 		\
 		gl_draw.c \
         gl_utils.c \
