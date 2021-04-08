@@ -100,6 +100,7 @@ add_executable(morphosis
         srcs/init.c
         srcs/cleanup.c
         srcs/errors.c
+        srcs/utils.c
         srcs/point_cloud.c
         srcs/build_fractal.c
         srcs/sample_julia.c
@@ -112,6 +113,7 @@ add_executable(morphosis
         srcs/gl_build.c
         srcs/gl_points.c
         srcs/gl_init.c
+        srcs/gl_calculations.c
         )
 
 target_link_libraries(morphosis ${GLFW_LIB} ${GLEW_LIB})

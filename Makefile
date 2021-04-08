@@ -15,6 +15,7 @@ SRC = 	main.c \
 		cleanup.c \
 		init.c \
 		errors.c \
+		utils.c \
 		point_cloud.c \
 		build_fractal.c \
 		sample_julia.c \
@@ -25,6 +26,7 @@ SRC = 	main.c \
         gl_build.c \
         gl_points.c \
         gl_init.c \
+        gl_calculations.c\
         \
         lib_complex.c
 

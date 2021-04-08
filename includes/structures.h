@@ -13,9 +13,24 @@
 
 # include <lib_complex.h>
 
+//---------------------------------------------------------------------------------------------------------------------- OPENGL STRUCTS
+typedef struct 				s_matrix
+{
+	mat4 					model_mat;
+	mat4 					projection_mat;
+	mat4 					view_mat;
+
+	vec3 					eye;
+	vec3 					center;
+	vec3 					up;
+
+	GLuint 					model;
+	GLuint 					view;
+}							t_matrix;
+
 typedef struct 				s_gl
 {
-	GLFWwindow 				*window; //---------------------------------------------------------------------------------GL context window
+	GLFWwindow 				*window;
 
 	GLuint 					vertexShader;
 	GLuint 					fragmentShader;
@@ -26,8 +41,11 @@ typedef struct 				s_gl
 
 	float 					*points;
 	uint					num_points;
+	t_matrix 				*matrix;
 }							t_gl;
 
+
+//---------------------------------------------------------------------------------------------------------------------- MORPHOSIS STRUCTS
 typedef struct 				s_julia
 {
 	uint					max_iter;
@@ -69,6 +87,7 @@ typedef struct 				s_data
 	t_fract 				*fract;
 	float3 					*vertexpos;
 	float					*vertexval;
+	float3					*triangles;
 }							t_data;
 
 #endif

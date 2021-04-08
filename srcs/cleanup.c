@@ -25,16 +25,21 @@ void 						clean_fract(t_fract *fract)
 	free(fract);
 }
 
+void						clean_gl(t_gl *gl)
+{
+	if (gl->points)
+		free(gl->points);
+	if (gl->matrix)
+		free(gl->matrix);
+	free(gl);
+}
+
 void 						clean_up(t_data *data)
 {
 	if (data)
 	{
 		if (data->gl)
-		{
-			if (data->gl->points)
-				free(data->gl->points);
-			free(data->gl);
-		}
+			clean_gl(data->gl);
 		if (data->fract)
 			clean_fract(data->fract);
 		if (data->vertexpos)

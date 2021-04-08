@@ -32,9 +32,10 @@
 //---------------------------------------------------------------------------------------------------------------------- gl_init.c
 void 						init_gl(t_gl *gl);
 void						gl_init_points(t_data *data, uint size);
+t_matrix 					*init_gl_matrices(void);
 
 //---------------------------------------------------------------------------------------------------------------------- gl_draw.c
-void 						run_graphics(t_gl *gl);
+void 						run_graphics(t_gl *gl, float3 max, float3 min);
 void						gl_render(t_gl *gl);
 
 //---------------------------------------------------------------------------------------------------------------------- gl_utils.c
@@ -57,5 +58,9 @@ void 						createProgram(t_gl *gl);
 //---------------------------------------------------------------------------------------------------------------------- gl_points.c
 void						gl_set_attrib_ptr(t_gl *gl, char *attrib_name, GLint num_vals, int stride, int offset);
 void						gl_retrieve_points(t_data *data);
+
+//---------------------------------------------------------------------------------------------------------------------- gl_calculations.c
+void 						gl_calc_transforms(t_gl *gl);
+void						gl_scale_points(t_gl *gl, float3 max, float3 min);
 
 #endif

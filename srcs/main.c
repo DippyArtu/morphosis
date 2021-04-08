@@ -18,7 +18,9 @@
 
 #include "morphosis.h"
 
-//TODO check out the cloud on GL
+//working with obj https://github.com/rlk/obj
+
+//TODO poligonisation
 int 						main(void)
 {
 	t_data 					*data;
@@ -27,9 +29,8 @@ int 						main(void)
 
 	calculate_point_cloud(data);
 	gl_retrieve_points(data);
-	//exit(0);
 
-	//run_graphics(data->gl);
+	run_graphics(data->gl, data->fract->p1, data->fract->p0);
 	clean_up(data);
 	return 0;
 }

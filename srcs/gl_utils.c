@@ -36,7 +36,7 @@ void 						init_gl(t_gl *gl)
 	glfwWindowHint(GLFW_DEPTH_BITS, 24);
 	glfwWindowHint(GLFW_STENCIL_BITS, 8);
 
-	gl->window = glfwCreateWindow(SRC_WIDTH, SRC_HEIGHT, "Lem-in", NULL, NULL); //-------------------Creates window
+	gl->window = glfwCreateWindow(SRC_WIDTH, SRC_HEIGHT, "Morphosis", NULL, NULL); //-------------------Creates window
 	glfwMakeContextCurrent(gl->window);
 	glewExperimental = GL_TRUE;
 	glewInit();

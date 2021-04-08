@@ -10,6 +10,9 @@
 
 #include "morphosis.h"
 
+//TODO comments
+
+//----------------------------------------------------------------------------------------------------------------------FRACTAL
 t_fract						*init_fract(void)
 {
 	t_fract 				*fract;
@@ -57,6 +60,7 @@ t_julia 					*init_julia(void)
 	return julia;
 }
 
+//----------------------------------------------------------------------------------------------------------------------DATA
 t_data						*init_data(void)
 {
 	t_data 					*data;
@@ -67,6 +71,7 @@ t_data						*init_data(void)
 	data->fract = init_fract();
 	data->vertexpos = NULL;
 	data->vertexval = NULL;
+	data->triangles = NULL;
 	return data;
 }
 
