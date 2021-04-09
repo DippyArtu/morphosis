@@ -51,4 +51,7 @@ void						build_fractal(t_data *data);
 //---------------------------------------------------------------------------------------------------------------------- sample_julia.c
 float 						sample_4D_Julia(t_julia *julia, float3 pos);
 
+//---------------------------------------------------------------------------------------------------------------------- polygonisation.c
+float3 						*polygonise(float3 *v_pos, float *v_val, uint2 *pos, t_data *data);
+
 #endif

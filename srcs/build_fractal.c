@@ -17,12 +17,15 @@ void						build_fractal(t_data *data)
 	t_fract 				*f;
 	float3 					*new_tris;
 	size_t 					i;
-	uint2					len; 																						//len.x = len original list (data->triangles), len.y = len second
+	uint2					len; 																						//len.x = len original triangles list (data->triangles), len.y = len second
+	uint2					pos;																						//pos in vertex array --- step_size = 8 veritces (a cube) | pos.x = POS_OLD | pos.y = POS_NEW (new end index)
 
 	i = 0;
 	f = data->fract;
 	len.x = 0;
 	len.y = 0;
+	pos.x = 0;
+	pos.y = 0;
 	new_tris = NULL;
 	for (size_t z = 0; z < f->grid_size; z++)
 	{
@@ -41,6 +44,7 @@ void						build_fractal(t_data *data)
 						data->gl->num_points++;
 					i++;
 				}
+				pos.y += 8;
 				/*
 				 * polygonise here
 				 *
@@ -57,6 +61,14 @@ void						build_fractal(t_data *data)
 				 * 			error(MALLOC_FAIL_ERR, data);
 				 *
 				*/
+				new_tris = polygonise(data->vertexpos, data->vertexval, &pos, data);
+				if (new_tris)
+				{
+					if (!(data->triangles = arr_float_cat(new_tris, data->triangles, &len)))
+						error(MALLOC_FAIL_ERR, data);
+				}
+				pos.x = pos.y;
+				exit(0);
 
 //----------------------------------------------------------------------------------------------------------------------TRIS CAT TEST
 //				new_tris = (float3 *)malloc(2 * sizeof(float3));

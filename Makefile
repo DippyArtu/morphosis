@@ -19,6 +19,7 @@ SRC = 	main.c \
 		point_cloud.c \
 		build_fractal.c \
 		sample_julia.c \
+		polygonisation.c \
 		\
 		gl_draw.c \
         gl_utils.c \
@@ -42,7 +43,8 @@ INC = 	morphosis.h \
 		stb_image.h \
 		errors.h \
 		lib_complex.h \
-		structures.h
+		structures.h \
+		look-up.h
 
 LIB_OBJS = $(addprefix $(LIB_OBJ_DIR), $(LIB_OBJ))
 LIB_OBJ = *.o

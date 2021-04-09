@@ -95,6 +95,7 @@ add_executable(morphosis
         includes/errors.h
         includes/lib_complex.h
         includes/structures.h
+        includes/look-up.h
 
         srcs/main.c
         srcs/init.c
@@ -104,6 +105,7 @@ add_executable(morphosis
         srcs/point_cloud.c
         srcs/build_fractal.c
         srcs/sample_julia.c
+        srcs/polygonisation.c
 
         srcs/lib_complex.c
 
