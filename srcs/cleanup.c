@@ -34,6 +34,13 @@ void						clean_gl(t_gl *gl)
 	free(gl);
 }
 
+void						clean_trigs(float3 **trigs, uint len)
+{
+	for (uint i = 0; i < len; i++)
+		free(trigs[i]);
+	free(trigs);
+}
+
 void 						clean_up(t_data *data)
 {
 	if (data)
@@ -46,6 +53,8 @@ void 						clean_up(t_data *data)
 			free(data->vertexpos);
 		if (data->vertexval)
 			free(data->vertexval);
+		if (data->triangles)
+			clean_trigs(data->triangles, data->len.x);
 		free(data);
 	}
 }

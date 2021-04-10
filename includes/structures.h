@@ -87,7 +87,8 @@ typedef struct 				s_data
 	t_fract 				*fract;
 	float3 					*vertexpos;
 	float					*vertexval;
-	float3					*triangles;
+	float3					**triangles;
+	uint2 					len; //len.x = len of triangles list
 }							t_data;
 
 #endif

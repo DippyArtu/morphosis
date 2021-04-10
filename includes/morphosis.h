@@ -32,12 +32,13 @@ void						init_vertex(t_data *data);
 void 						error(int errno, t_data *data);
 
 //---------------------------------------------------------------------------------------------------------------------- utils.c
-float3						*arr_float_cat(float3 *f_from, float3 *f_to, uint2 *len);
+float3						**arr_float3_cat(float3 **f_from, float3 **f_to, uint2 *len);
 
 //---------------------------------------------------------------------------------------------------------------------- cleanup.c
 void 						clean_up(t_data *data);
 void						clean_gl(t_gl *gl);
 void 						clean_fract(t_fract *fract);
+void						clean_trigs(float3 **trigs, uint len);
 
 //---------------------------------------------------------------------------------------------------------------------- point_cloud.c
 void 						calculate_point_cloud(t_data *data);
@@ -52,6 +53,6 @@ void						build_fractal(t_data *data);
 float 						sample_4D_Julia(t_julia *julia, float3 pos);
 
 //---------------------------------------------------------------------------------------------------------------------- polygonisation.c
-float3 						*polygonise(float3 *v_pos, float *v_val, uint2 *pos, t_data *data);
+float3 						**polygonise(float3 *v_pos, float *v_val, uint2 *pos, t_data *data);
 
 #endif
