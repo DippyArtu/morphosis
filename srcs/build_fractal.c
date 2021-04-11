@@ -10,7 +10,6 @@
 
 #include "morphosis.h"
 
-//TODO y coordinate is off
 void						build_fractal(t_data *data)
 {
 	t_fract 				*f;
@@ -53,7 +52,5 @@ void						build_fractal(t_data *data)
 			}
 		}
 	}
-	printf("%.3f    %.3f   %.3f\n", data->triangles[0][0].x, data->triangles[0][0].y, data->triangles[0][0].z);
-	printf("%.3f    %.3f   %.3f\n", data->triangles[0][1].x, data->triangles[0][1].y, data->triangles[0][1].z);
-	printf("%.3f    %.3f   %.3f\n", data->triangles[0][2].x, data->triangles[0][2].y, data->triangles[0][2].z);
+	data->gl->num_tris = data->len.x;
 }

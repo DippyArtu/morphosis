@@ -31,6 +31,8 @@ void						clean_gl(t_gl *gl)
 		free(gl->points);
 	if (gl->matrix)
 		free(gl->matrix);
+	if (gl->tris)
+		free(gl->tris);
 	free(gl);
 }
 

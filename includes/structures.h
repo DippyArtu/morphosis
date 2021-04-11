@@ -40,6 +40,8 @@ typedef struct 				s_gl
 	GLuint 					vao;
 
 	float 					*points;
+	float					*tris;
+	uint 					num_tris;
 	uint					num_points;
 	t_matrix 				*matrix;
 }							t_gl;

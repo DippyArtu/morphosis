@@ -10,6 +10,30 @@
 
 #include "morphosis.h"
 
+void						gl_retrieve_tris(t_data *data)
+{
+	uint					i;
+	uint 					j;
+	uint					size;
+
+	i = 0;
+	j = 0;
+	size = data->gl->num_tris * 3 * 3;             																		//each cell has 3 coordinates with 3 values each
+	if (!(data->gl->tris = (float *)malloc(size * sizeof(float))))
+		error(MALLOC_FAIL_ERR, data);
+
+	while (j < size)
+	{
+		for (int c = 0; c < 3; c++)
+		{
+			data->gl->tris[j++] = data->triangles[i][c].x;
+			data->gl->tris[j++] = data->triangles[i][c].y;
+			data->gl->tris[j++] = data->triangles[i][c].z;
+		}
+		i++;
+	}
+}
+
 void						gl_retrieve_points(t_data *data)
 {
 	uint					i;

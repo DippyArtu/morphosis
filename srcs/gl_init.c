@@ -10,7 +10,6 @@
 
 #include "morphosis.h"
 
-//TODO comments
 void						gl_init_points(t_data *data, uint size)
 {
 	if (!(data->gl->points = (float *)malloc(3 * size * sizeof(float))))
@@ -56,6 +55,8 @@ t_gl						*init_gl_struct(void)
 	gl->vbo = 0;
 	gl->vao = 0;
 	gl->points = NULL;
+	gl->tris = NULL;
+	gl->num_tris = 0;
 	gl->num_points = 0;
 	gl->matrix = init_gl_matrices();
 	return gl;
