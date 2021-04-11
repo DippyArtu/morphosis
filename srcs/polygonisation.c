@@ -11,26 +11,27 @@
 #include "morphosis.h"
 #include "look-up.h"
 
-static uint 				get_cube_index(float *v_val)
+//TODO working on this file
+static uint 				get_cube_index(float *v_val, uint pos)
 {
 	uint					cubeindex;
 
 	cubeindex = 0;
-	if (v_val[0])
+	if (v_val[pos + 0])
 		cubeindex |= 1;
-	if (v_val[1])
+	if (v_val[pos + 1])
 		cubeindex |= 2;
-	if (v_val[2])
+	if (v_val[pos + 2])
 		cubeindex |= 4;
-	if (v_val[3])
+	if (v_val[pos + 3])
 		cubeindex |= 8;
-	if (v_val[4])
+	if (v_val[pos + 4])
 		cubeindex |= 16;
-	if (v_val[5])
+	if (v_val[pos + 5])
 		cubeindex |= 32;
-	if (v_val[6])
+	if (v_val[pos + 6])
 		cubeindex |= 64;
-	if (v_val[7])
+	if (v_val[pos + 7])
 		cubeindex |= 128;
 	return cubeindex;
 }
@@ -40,23 +41,28 @@ static float3				interpolate(float3 p0, float3 p1, float v0, float v1)
 	float					mu;
 	float3					p;
 
+	//printf("interp:  ");
 	if (v0 == 1)
+	{
+		//printf("p0\n");
 		return p0;
+	}
 	if (v1 == 1)
+	{
+		//printf("p1\n");
 		return p1;
+	}
 	if ((v1 - v0) == 0)
+	{
+		//printf("v0\n");
 		return v0; //?
+	}
 	mu = (1 - v0) / (v1 - v0);
 	p = p0 + mu * (p1 - p0);
+	//printf("p:  %.3f   %.3f    %.3f\n", p.x, p.y, p.z);
 	return p;
 }
 
-//TODO create a way to address indexies of a cube in space (pos.y - pos.x) = 8 vert cube
-//TODO (pos,y - 8)?
-//TODO or mb cpy 8 consequtive verts and work with them (slower)
-
-//TODO OH, JUST ADRESS IT BY (POS.X + i)
-//TODO wtf are verts....
 static float3				*get_vertices(uint cubeindex, float3 *v_pos, float *v_val, uint pos)
 {
 	float3					*vertlist;
@@ -92,36 +98,68 @@ static float3				*get_vertices(uint cubeindex, float3 *v_pos, float *v_val, uint
 }
 
 /*
+ * Stores newly calculated triangles in tris_new
+ */
+static float3						**package_triangles(float3 *vertlist, uint cubeindex, uint i, t_data *data)
+{
+	uint2 					len;
+	float3 					**tris_new;
+
+	len.x = 0;
+	len.y = 1;
+	tris_new = NULL;
+	if (!(tris_new = alloc_float3_arr(tris_new, &len)))
+		error(MALLOC_FAIL_ERR, data);
+
+	tris_new[0][0] = vertlist[tritable[cubeindex][i]];
+	tris_new[0][1] = vertlist[tritable[cubeindex][i + 1]];
+	tris_new[0][2] = vertlist[tritable[cubeindex][i + 2]];
+	return tris_new;
+}
+
+/*
  * Process verticies from index pos.x to pos.y
  *
  * Returns NULL if no polygon is created (not an error!)
  */
+//TODO y variable is calculated wrong
 float3 						**polygonise(float3 *v_pos, float *v_val, uint2 *pos, t_data *data)
 {
 	float3					**tris;
-	float3 					**tris_tmp;
+	float3 					**tris_new;
 	float3					*vertlist;
 	uint 					cubeindex;
 	uint 					i;
 	uint2 					len;
 
 	tris = NULL;
-	tris_tmp = NULL;
+	tris_new = NULL;
 	vertlist = NULL;
 	i = 0;
-	cubeindex = get_cube_index(v_val);
+	len.x = 0;
+	cubeindex = get_cube_index(v_val, pos->x);
 	if (edgetable[cubeindex] == 0)
 		return NULL;
 	if (!(vertlist = get_vertices(cubeindex, v_pos, v_val, pos->x)))
 		error(MALLOC_FAIL_ERR, data);
 
-	len.x = 0;
-	len.y = 1;
+//	printf("index: %u\n", edgetable[cubeindex]);
+//	printf("%.3f    %.3f   %.3f\n", vertlist[tritable[cubeindex][0]].x, vertlist[tritable[cubeindex][0]].y, vertlist[tritable[cubeindex][0]].z);
+//	printf("%.3f    %.3f   %.3f\n", vertlist[tritable[cubeindex][1]].x, vertlist[tritable[cubeindex][1]].y, vertlist[tritable[cubeindex][1]].z);
+//	printf("%.3f    %.3f   %.3f\n", vertlist[tritable[cubeindex][2]].x, vertlist[tritable[cubeindex][2]].y, vertlist[tritable[cubeindex][2]].z);
+
+/*
+ * packages 3 vertices into one triangle TRIS_NEW and cats it to TRIS
+ */
 	while ((int)tritable[cubeindex][i] != -1)
 	{
-
+		tris_new = package_triangles(vertlist, cubeindex, i, data);
+		len.y = 1;
+		if (!(tris = arr_float3_cat(tris_new, tris, &len)))
+			error(MALLOC_FAIL_ERR, data);
 		i += 3;
 	}
+	data->len.y = len.x;
 
 	free(vertlist);
 	return tris;

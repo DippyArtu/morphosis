@@ -33,6 +33,7 @@ void 						error(int errno, t_data *data);
 
 //---------------------------------------------------------------------------------------------------------------------- utils.c
 float3						**arr_float3_cat(float3 **f_from, float3 **f_to, uint2 *len);
+float3 						**alloc_float3_arr(float3 **mem, uint2 *len);
 
 //---------------------------------------------------------------------------------------------------------------------- cleanup.c
 void 						clean_up(t_data *data);

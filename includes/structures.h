@@ -88,7 +88,12 @@ typedef struct 				s_data
 	float3 					*vertexpos;
 	float					*vertexval;
 	float3					**triangles;
-	uint2 					len; 			//--------------------------------------------------------------------------len.x = num of triangles list
+
+	/*
+	 * len.x = totall length of triangles list
+	 * len.y = length of list to be appended
+	 */
+	uint2 					len;
 }							t_data;
 
 #endif

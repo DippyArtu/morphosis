@@ -10,7 +10,7 @@
 
 #include "morphosis.h"
 
-static float3 				**alloc_float3_arr(float3 **mem, uint2 *len)
+float3 						**alloc_float3_arr(float3 **mem, uint2 *len)
 {
 	uint 					size;
 
@@ -29,7 +29,7 @@ static float3 				**alloc_float3_arr(float3 **mem, uint2 *len)
 	}
 	else
 	{
-		if (!(mem = (float3 **)realloc(mem, sizeof(float3 **) * size)))
+		if (!(mem = (float3 **)realloc(mem, sizeof(float3 *) * size)))
 			return NULL;
 		for (uint c = len->x; c < size; c++)
 		{
@@ -69,9 +69,13 @@ float3						**arr_float3_cat(float3 **f_from, float3 **f_to, uint2 *len)
 	}
 	len->x = res_c;
 
-	for (uint i = 0; i < len->y; i++)
-		free(f_from[i]);
-	free(f_from);
+	if (f_from)
+	{
+		for (uint i = 0; i < len->y; i++)
+			free(f_from[i]);
+		free(f_from);
+		f_from = NULL;
+	}
 
 	len->y = 0;
 	f_from = NULL;
