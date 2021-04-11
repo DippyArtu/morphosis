@@ -49,9 +49,8 @@ void						build_fractal(t_data *data)
 				 *
 				 * tris and function polygonise return are lists —> cat them
 				 * have triangles_temp[], calculate to that & cat with triangles[]
-				 * num triangles == pow(grid_size, 3);
-				 * write tpm_tris = init_triangles() and cat with data.triangles
-				 * use arr_float_cat (if returns NULL — error)
+				 * write tpm_tris = init_triangles() and cat with data-.triangles
+				 * use arr_float3_cat (if returns NULL — error)
 				 *
 				 * use like so:
 				 *
@@ -60,93 +59,87 @@ void						build_fractal(t_data *data)
 				 * 			error(MALLOC_FAIL_ERR, data);
 				 *
 				*/
-//				new_tris = polygonise(data->vertexpos, data->vertexval, &pos, data);
-//				if (new_tris)
-//				{
-//					if (!(data->triangles = arr_float3_cat(new_tris, data->triangles, &len)))
-//						error(MALLOC_FAIL_ERR, data);
-//				}
-//				pos.x = pos.y;
-//				exit(0);
+				new_tris = polygonise(data->vertexpos, data->vertexval, &pos, data);
+				if (new_tris)
+				{
+					if (!(data->triangles = arr_float3_cat(new_tris, data->triangles, &data->len)))
+						error(MALLOC_FAIL_ERR, data);
+				}
+				pos.x = pos.y;
+				exit(0);
 
 //----------------------------------------------------------------------------------------------------------------------TRIS CAT TEST
-				new_tris = (float3 **)malloc(2 * sizeof(float3 *));
-				for (int i = 0; i < 3; i++)
-					new_tris[i] = (float3 *)malloc(sizeof(float3));
-
-				new_tris[0][0].x = 1.1f;
-				new_tris[0][0].y = 1.1f;
-				new_tris[0][0].z = 1.1f;
-				new_tris[0][1].x = 1.2f;
-				new_tris[0][1].y = 1.2f;
-				new_tris[0][1].z = 1.2f;
-				new_tris[0][2].x = 1.3f;
-				new_tris[0][2].y = 1.3f;
-				new_tris[0][2].z = 1.3f;
-
-				new_tris[1][0].x = 2.1f;
-				new_tris[1][0].y = 2.1f;
-				new_tris[1][0].z = 2.1f;
-				new_tris[1][1].x = 2.2f;
-				new_tris[1][1].y = 2.2f;
-				new_tris[1][1].z = 2.2f;
-				new_tris[1][2].x = 2.3f;
-				new_tris[1][2].y = 2.3f;
-				new_tris[1][2].z = 2.3f;
-
-
-				data->len.y = 2;
-				data->triangles = arr_float3_cat(new_tris, data->triangles, &data->len);
-				for (uint c = 0; c < data->len.x; c++)
-				{
-					printf("TRIG %ui: (%.1f,  %.1f,  %.1f)", c, data->triangles[c][0].x, data->triangles[c][0].y, data->triangles[c][0].z);
-					printf(", (%.1f,  %.1f,  %.1f)", data->triangles[c][1].x, data->triangles[c][1].y, data->triangles[c][1].z);
-					printf(", (%.1f,  %.1f,  %.1f)\n", data->triangles[c][2].x, data->triangles[c][2].y, data->triangles[c][2].z);
-				}
-				printf("len x: %i    ley y:  %i\n", data->len.x, data->len.y);
-				printf("\n");
-
-				//------------------------------------------------------???
-				//TODO work on cat function
-				new_tris = (float3 **)malloc(2 * sizeof(float3 *));
-				printf("hi init start\n");
-				for (int i = 0; i < 3; i++)
-					new_tris[i] = (float3 *)malloc(sizeof(float3));
-				printf("hi init end\n");
-
-				new_tris[0][0].x = 1.1f;
-				new_tris[0][0].y = 1.1f;
-				new_tris[0][0].z = 1.1f;
-				new_tris[0][1].x = 1.2f;
-				new_tris[0][1].y = 1.2f;
-				new_tris[0][1].z = 1.2f;
-				new_tris[0][2].x = 1.3f;
-				new_tris[0][2].y = 1.3f;
-				new_tris[0][2].z = 1.3f;
-
-				new_tris[1][0].x = 2.1f;
-				new_tris[1][0].y = 2.1f;
-				new_tris[1][0].z = 2.1f;
-				new_tris[1][1].x = 2.2f;
-				new_tris[1][1].y = 2.2f;
-				new_tris[1][1].z = 2.2f;
-				new_tris[1][2].x = 2.3f;
-				new_tris[1][2].y = 2.3f;
-				new_tris[1][2].z = 2.3f;
-
-
-				data->len.y = 2;
-				data->triangles = arr_float3_cat(new_tris, data->triangles, &data->len);
-				for (uint c = 0; c < data->len.x; c++)
-				{
-					printf("TRIG %ui: (%.1f,  %.1f,  %.1f)", c, data->triangles[c][0].x, data->triangles[c][0].y, data->triangles[c][0].z);
-					printf(", (%.1f,  %.1f,  %.1f)", data->triangles[c][1].x, data->triangles[c][1].y, data->triangles[c][1].z);
-					printf(", (%.1f,  %.1f,  %.1f)\n", data->triangles[c][2].x, data->triangles[c][2].y, data->triangles[c][2].z);
-				}
-				printf("\nlen x: %i    ley y:  %i\n", data->len.x, data->len.y);
-				printf("\n");
-
-				exit(0);
+//				new_tris = (float3 **)malloc(2 * sizeof(float3 *));
+//				for (int ii = 0; ii < 2; ii++)
+//					new_tris[ii] = (float3 *)malloc(3 * sizeof(float3));
+//
+//				new_tris[0][0].x = 1.1f;
+//				new_tris[0][0].y = 1.1f;
+//				new_tris[0][0].z = 1.1f;
+//				new_tris[0][1].x = 1.2f;
+//				new_tris[0][1].y = 1.2f;
+//				new_tris[0][1].z = 1.2f;
+//				new_tris[0][2].x = 1.3f;
+//				new_tris[0][2].y = 1.3f;
+//				new_tris[0][2].z = 1.3f;
+//
+//				new_tris[1][0].x = 2.1f;
+//				new_tris[1][0].y = 2.1f;
+//				new_tris[1][0].z = 2.1f;
+//				new_tris[1][1].x = 2.2f;
+//				new_tris[1][1].y = 2.2f;
+//				new_tris[1][1].z = 2.2f;
+//				new_tris[1][2].x = 2.3f;
+//				new_tris[1][2].y = 2.3f;
+//				new_tris[1][2].z = 2.3f;
+//
+//
+//				data->len.y = 2;
+//				data->triangles = arr_float3_cat(new_tris, data->triangles, &data->len);
+//				for (uint c = 0; c < data->len.x; c++)
+//				{
+//					printf("TRIG %u: (%.1f,  %.1f,  %.1f)", c, data->triangles[c][0].x, data->triangles[c][0].y, data->triangles[c][0].z);
+//					printf(", (%.1f,  %.1f,  %.1f)", data->triangles[c][1].x, data->triangles[c][1].y, data->triangles[c][1].z);
+//					printf(", (%.1f,  %.1f,  %.1f)\n", data->triangles[c][2].x, data->triangles[c][2].y, data->triangles[c][2].z);
+//				}
+//				printf("len x: %i    ley y:  %i\n", data->len.x, data->len.y);
+//				printf("\n");
+//
+//				new_tris = (float3 **)malloc(2 * sizeof(float3 *));
+//				for (int ii = 0; ii < 2; ii++)
+//					new_tris[ii] = (float3 *)malloc(3 * sizeof(float3));
+//
+//				new_tris[0][0].x = 3.1f;
+//				new_tris[0][0].y = 3.1f;
+//				new_tris[0][0].z = 3.1f;
+//				new_tris[0][1].x = 3.2f;
+//				new_tris[0][1].y = 3.2f;
+//				new_tris[0][1].z = 3.2f;
+//				new_tris[0][2].x = 3.3f;
+//				new_tris[0][2].y = 3.3f;
+//				new_tris[0][2].z = 3.3f;
+//
+//				new_tris[1][0].x = 4.1f;
+//				new_tris[1][0].y = 4.1f;
+//				new_tris[1][0].z = 4.1f;
+//				new_tris[1][1].x = 4.2f;
+//				new_tris[1][1].y = 4.2f;
+//				new_tris[1][1].z = 4.2f;
+//				new_tris[1][2].x = 4.3f;
+//				new_tris[1][2].y = 4.3f;
+//				new_tris[1][2].z = 4.3f;
+//
+//
+//				data->len.y = 2;
+//				data->triangles = arr_float3_cat(new_tris, data->triangles, &data->len);
+//				for (uint c = 0; c < data->len.x; c++)
+//				{
+//					printf("TRIG %ui: (%.1f,  %.1f,  %.1f)", c, data->triangles[c][0].x, data->triangles[c][0].y, data->triangles[c][0].z);
+//					printf(", (%.1f,  %.1f,  %.1f)", data->triangles[c][1].x, data->triangles[c][1].y, data->triangles[c][1].z);
+//					printf(", (%.1f,  %.1f,  %.1f)\n", data->triangles[c][2].x, data->triangles[c][2].y, data->triangles[c][2].z);
+//				}
+//				printf("\nlen x: %i    ley y:  %i\n", data->len.x, data->len.y);
+//				printf("\n");
 //----------------------------------------------------------------------------------------------------------------------TRIS CAT TEST
 			}
 		}

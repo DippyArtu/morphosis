@@ -10,17 +10,20 @@
 
 #include "morphosis.h"
 
-static float3 				**alloc_float3_arr(float3 **mem, uint size)
+static float3 				**alloc_float3_arr(float3 **mem, uint2 *len)
 {
+	uint 					size;
+
+	size = len->x + len->y;
 	if (!size)
 		return NULL;
 	if (!mem)
 	{
 		if (!(mem = (float3 **)malloc(sizeof(float3 *) * size)))
 			return NULL;
-		for (int i = 0; i < 3; i++)
+		for (uint c = len->x; c < size; c++)
 		{
-			if (!(mem[i] = (float3 *)malloc(sizeof(float3))))
+			if (!(mem[c] = (float3 *)malloc(3 * sizeof(float3))))
 				return NULL;
 		}
 	}
@@ -28,9 +31,9 @@ static float3 				**alloc_float3_arr(float3 **mem, uint size)
 	{
 		if (!(mem = (float3 **)realloc(mem, sizeof(float3 **) * size)))
 			return NULL;
-		for (int i = 0; i < 3; i++)
+		for (uint c = len->x; c < size; c++)
 		{
-			if (!(mem[i] = (float3 *)malloc(sizeof(float3))))
+			if (!(mem[c] = (float3 *)malloc(3 * sizeof(float3))))
 				return NULL;
 		}
 	}
@@ -44,10 +47,6 @@ static float3 				**alloc_float3_arr(float3 **mem, uint size)
  * len.y = FROM counter
  * len.x = TO counter
  */
-
-//TODO rewrite so its float3 ** ([][12])
-
-//TODO check how it frees stuff
 float3						**arr_float3_cat(float3 **f_from, float3 **f_to, uint2 *len)
 {
 	uint					from_c;
@@ -57,7 +56,7 @@ float3						**arr_float3_cat(float3 **f_from, float3 **f_to, uint2 *len)
 	res_c = len->x + len->y;
 	from_c = 0;
 	to_c = len->x;
-	if (!(f_to = alloc_float3_arr(f_to, (uint)(len->x + len->y))))
+	if (!(f_to = alloc_float3_arr(f_to, len)))
 		return NULL;
 
 	while (to_c < res_c)
@@ -68,7 +67,6 @@ float3						**arr_float3_cat(float3 **f_from, float3 **f_to, uint2 *len)
 		to_c++;
 		from_c++;
 	}
-
 	len->x = res_c;
 
 	for (uint i = 0; i < len->y; i++)
