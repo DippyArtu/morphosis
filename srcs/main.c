@@ -21,13 +21,43 @@
  *
  */
 
+//TODO OpenCL
 #include "morphosis.h"
 
-int 						main(void)
+static t_data 						*get_args(int argv, char **argc)
+{
+	t_data					*data;
+	float 					s_size;
+	float4 					q;
+
+	data = NULL;
+	if (argv != 6)
+	{
+		if (argv == 2 && !(strcmp(argc[1], "def")))
+		{
+			data = init_data();
+			return data;
+		}
+		error(ARGS_ERR, NULL);
+	}
+	if ((s_size = (float)strtod(argc[1], NULL)) < 0.00001 || s_size > 1)
+		error(GRID_ERR, NULL);
+	q.x = (float)strtod(argc[2], NULL);
+	q.y = (float)strtod(argc[3], NULL);
+	q.z = (float)strtod(argc[4], NULL);
+	q.w = (float)strtod(argc[5], NULL);
+	data = init_data();
+
+	data->fract->step_size = s_size;
+	data->fract->julia->c = q;
+	return data;
+}
+
+int 						main(int argv, char **argc)
 {
 	t_data 					*data;
 
-	data = init_data();
+	data = get_args(argv, argc);
 
 	calculate_point_cloud(data);
 	gl_retrieve_tris(data);

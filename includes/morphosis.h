@@ -14,6 +14,7 @@
 # include "stdio.h"
 # include "stdlib.h"
 # include "ctype.h"
+# include "string.h"
 
 # include <gl_includes.h>
 # include <errors.h>

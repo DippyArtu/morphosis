@@ -50,7 +50,7 @@ INC = 	morphosis.h \
 		look-up.h \
 		obj.h
 
-FLAGS = -I$(INC_DIR)
+FLAGS = -O3 -I$(INC_DIR)
 GL_LIBS = -framework OpenGL -I/usr/local/include -lGLEW -lglfw
 
 all: $(NAME)
