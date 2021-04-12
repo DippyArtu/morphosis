@@ -35,11 +35,11 @@ t_matrix 					*init_gl_matrices(void);
 
 //---------------------------------------------------------------------------------------------------------------------- gl_draw.c
 void 						run_graphics(t_gl *gl, float3 max, float3 min);
-void						gl_render(t_gl *gl);
+void 						gl_render(t_gl *gl);
 
 //---------------------------------------------------------------------------------------------------------------------- gl_utils.c
 void 						framebuffer_size_callback(GLFWwindow *window, int width, int height);
-void 						processInput(GLFWwindow *window);
+void 						processInput(GLFWwindow *window, t_gl *gl);
 void 						terminate_gl(t_gl *gl);
 
 //---------------------------------------------------------------------------------------------------------------------- gl_buffers.c

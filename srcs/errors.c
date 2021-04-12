@@ -20,6 +20,8 @@ void 						error(int errno, t_data *data)
 		printf("%s%s", ARGS, USAGE);
 	else if (errno == GRID_ERR)
 		printf(GRID);
+	else if (errno == NO_ARG_ERR)
+		printf("%s%s", NO_ARG, USAGE);
 	clean_up(data);
 	exit(1);
 }

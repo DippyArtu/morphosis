@@ -32,6 +32,8 @@ typedef struct 				s_gl
 {
 	GLFWwindow 				*window;
 
+	int						export;
+
 	GLuint 					vertexShader;
 	GLuint 					fragmentShader;
 	GLuint					shaderProgram;

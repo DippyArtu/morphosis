@@ -28,7 +28,7 @@ void 						run_graphics(t_gl *gl, float3 max, float3 min)
 	terminate_gl(gl);
 }
 
-void						gl_render(t_gl *gl)
+void							gl_render(t_gl *gl)
 {
 	float 					time;
 	float					delta;
@@ -38,7 +38,7 @@ void						gl_render(t_gl *gl)
 	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	while (!glfwWindowShouldClose(gl->window))
 	{
-		processInput(gl->window);
+		processInput(gl->window, gl);
 
 		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);

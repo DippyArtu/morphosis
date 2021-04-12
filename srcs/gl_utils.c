@@ -19,10 +19,15 @@ void 						framebuffer_size_callback(GLFWwindow *window, int width, int height) 
 		i++;
 }
 
-void 						processInput(GLFWwindow *window) //---------------------------------------------------------Key press capture
+void 						processInput(GLFWwindow *window, t_gl *gl) //-----------------------------------------------Key press capture
 {
 	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
 		glfwSetWindowShouldClose(window, GL_TRUE);
+	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
+	{
+		gl->export = 1;
+		glfwSetWindowShouldClose(window, GL_TRUE);
+	}
 }
 
 void 						init_gl(t_gl *gl)

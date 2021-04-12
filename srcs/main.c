@@ -31,6 +31,8 @@ static t_data 						*get_args(int argv, char **argc)
 	float4 					q;
 
 	data = NULL;
+	if (argv == 1)
+		error(NO_ARG_ERR, NULL);
 	if (argv != 6)
 	{
 		if (argv == 2 && !(strcmp(argc[1], "def")))
@@ -56,17 +58,21 @@ static t_data 						*get_args(int argv, char **argc)
 int 						main(int argv, char **argc)
 {
 	t_data 					*data;
+	int 					export;
 
+	export = 0;
 	data = get_args(argv, argc);
-
 	calculate_point_cloud(data);
 	gl_retrieve_tris(data);
-
 	clean_calcs(data);
-	printf("\nEXPORTING----\n");
-	export_obj(data);
-	printf("DONE\n");
+
 	run_graphics(data->gl, data->fract->p1, data->fract->p0);
+	if (data->gl->export)
+	{
+		printf("\nEXPORTING----\n");
+		export_obj(data);
+		printf("DONE\n");
+	}
 
 	clean_up(data);
 	return 0;
