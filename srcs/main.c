@@ -23,7 +23,6 @@
 
 #include "morphosis.h"
 
-//TODO SICK now export as obj
 int 						main(void)
 {
 	t_data 					*data;
@@ -33,7 +32,12 @@ int 						main(void)
 	calculate_point_cloud(data);
 	gl_retrieve_tris(data);
 
+	clean_calcs(data);
+	printf("\nEXPORTING----\n");
+	export_obj(data);
+	printf("DONE\n");
 	run_graphics(data->gl, data->fract->p1, data->fract->p0);
+
 	clean_up(data);
 	return 0;
 }

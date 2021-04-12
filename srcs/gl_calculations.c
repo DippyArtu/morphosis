@@ -58,7 +58,7 @@ void						gl_scale_tris(t_gl *gl, float3 max, float3 min)
 		delta_y = 1.0f;
 	if (!(delta_z = (float)(max.z - min.z)))
 		delta_z = 1.0f;
-	while (i < gl->num_tris)
+	while (i < gl->num_pts)
 	{
 		gl->tris[i] = ((gl->tris[i] - (float)min.x) / delta_x) * 1.5f - 0.75f;
 		i++;

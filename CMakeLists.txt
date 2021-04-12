@@ -96,6 +96,7 @@ add_executable(morphosis
         includes/lib_complex.h
         includes/structures.h
         includes/look-up.h
+        includes/obj.h
 
         srcs/main.c
         srcs/init.c
@@ -106,6 +107,7 @@ add_executable(morphosis
         srcs/build_fractal.c
         srcs/sample_julia.c
         srcs/polygonisation.c
+        srcs/write_obj.c
 
         srcs/lib_complex.c
 
@@ -116,6 +118,8 @@ add_executable(morphosis
         srcs/gl_points.c
         srcs/gl_init.c
         srcs/gl_calculations.c
+
+        srcs/obj.c
         )
 
 target_link_libraries(morphosis ${GLFW_LIB} ${GLEW_LIB})

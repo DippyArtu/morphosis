@@ -10,6 +10,17 @@
 
 #include "morphosis.h"
 
+void 						clean_calcs(t_data *data)
+{
+	if (data->vertexpos && data->vertexval)
+	{
+		free(data->vertexval);
+		free(data->vertexpos);
+		data->vertexval = NULL;
+		data->vertexpos = NULL;
+	}
+}
+
 void 						clean_fract(t_fract *fract)
 {
 	if (!fract)

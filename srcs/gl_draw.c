@@ -18,7 +18,7 @@ void 						run_graphics(t_gl *gl, float3 max, float3 min)
 
 	init_gl(gl);
 	createVAO(gl);
-	createVBO(gl, gl->num_tris * sizeof(float), (GLfloat *)gl->tris);
+	createVBO(gl, gl->num_pts * sizeof(float), (GLfloat *)gl->tris);
 
 	makeShaderProgram(gl);
 	gl_set_attrib_ptr(gl, "pos", 3,3, 0);
@@ -54,7 +54,7 @@ void						gl_render(t_gl *gl)
 		glUniformMatrix4fv(gl->matrix->view, 1, GL_FALSE, (float *)gl->matrix->view_mat);
 
 		//Render frames
-		glDrawArrays(GL_TRIANGLES, 0, gl->num_tris);
+		glDrawArrays(GL_TRIANGLES, 0, gl->num_pts);
 
 		glfwSwapBuffers(gl->window);
 		glfwPollEvents();

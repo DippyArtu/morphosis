@@ -50,5 +50,6 @@ void						build_fractal(t_data *data)
 			}
 		}
 	}
-	data->gl->num_tris = data->len.x * 3 * 3; 																			//each cell has 3 coordinates with 3 values each
+	data->gl->num_tris = data->len.x;
+	data->gl->num_pts = data->len.x * 3 * 3; 																			//each cell has 3 coordinates with 3 values each
 }

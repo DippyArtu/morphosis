@@ -49,7 +49,7 @@ t_gl						*init_gl_struct(void)
 	gl->vbo = 0;
 	gl->vao = 0;
 	gl->tris = NULL;
-	gl->num_tris = 0;
+	gl->num_pts = 0;
 	gl->matrix = init_gl_matrices();
 	return gl;
 }

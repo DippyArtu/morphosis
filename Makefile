@@ -20,6 +20,7 @@ SRC = 	main.c \
 		build_fractal.c \
 		sample_julia.c \
 		polygonisation.c \
+		write_obj.c \
 		\
 		gl_draw.c \
         gl_utils.c \
@@ -28,6 +29,8 @@ SRC = 	main.c \
         gl_points.c \
         gl_init.c \
         gl_calculations.c\
+        \
+        obj.c\
         \
         lib_complex.c
 
@@ -44,41 +47,28 @@ INC = 	morphosis.h \
 		errors.h \
 		lib_complex.h \
 		structures.h \
-		look-up.h
+		look-up.h \
+		obj.h
 
-LIB_OBJS = $(addprefix $(LIB_OBJ_DIR), $(LIB_OBJ))
-LIB_OBJ = *.o
-LIB_OBJ_DIR = ./libft/obj/
-LIB_SRC_DIR = ./libft/srcs/
-LIB_INCS = $(addprefix $(LIB_INC_DIR), $(LIB_INC))
-LIB_INC = libft.h get_next_line.h
-LIB_INC_DIR = ./libft/includes/
-
-FLAGS = -Werror -Wextra -Wall -I$(INC_DIR) -I$(LIB_INC_DIR)
+FLAGS = -I$(INC_DIR)
 GL_LIBS = -framework OpenGL -I/usr/local/include -lGLEW -lglfw
 
 all: $(NAME)
 
-$(NAME): $(OBJ_DIR) $(LIB_OBJS) $(OBJS)
-		clang $(OBJS) ./libft/libft.a -o $(NAME) $(GL_LIBS)
+$(NAME): $(OBJ_DIR) $(OBJS)
+		clang $(OBJS) -o $(NAME) $(GL_LIBS)
 
 $(OBJ_DIR):
 		mkdir -p $@
-		@mkdir -p $(LIB_OBJ_DIR)
-
-$(LIB_OBJ_DIR)%.o: $(LIB_SRC_DIR)%.c $(LIB_INCS)
-		@make -C libft
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c $(INCS)
 		clang $(FLAGS) -o $@ -c $<
 
 clean:
-		@make clean -C libft
 		@rm -f $(OBJS)
 		@rm -rf $(OBJ_DIR)
 
 fclean: clean
-		@make fclean -C libft
 		@rm -f $(NAME)
 
 re: fclean all
