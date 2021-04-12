@@ -44,86 +44,27 @@ void 						gl_calc_transforms(t_gl *gl)
  * If coordinates are on a straight line, delta would equal to 0
  * to avoid the division by zero, in that case, delta is set to 1
  */
-void						gl_scale_points(t_gl *gl, float3 max, float3 min)
-{
-	uint 					i;
-	uint 					num_points;
-	float					delta_x;
-	float					delta_y;
-	float 					delta_z;
-	float 					x;
-	float 					y;
-	float 					z;
-	float 					prev_x;
-	float 					prev_y;
-	float					prev_z;
-
-	i = 0;
-	prev_x = 0;
-	prev_y = 0;
-	prev_z = 0;
-	num_points = gl->num_points * 3;
-	if (!(delta_x = (float)(max.x - min.x)))
-		delta_x = 1.0f;
-	if (!(delta_y = (float)(max.y - min.y)))
-		delta_y = 1.0f;
-	if (!(delta_z = (float)(max.z - min.z)))
-		delta_z = 1.0f;
-	while (i < num_points)
-	{
-		gl->points[i] = ((gl->points[i] - (float)min.x) / delta_x) * 1.5f - 0.75f;
-		x = gl->points[i];
-		i++;
-		gl->points[i] = ((gl->points[i] - (float)min.y) / delta_y) * 1.5f - 0.75f;
-		y = gl->points[i];
-		i++;
-		gl->points[i] = ((gl->points[i] - (float)min.z) / delta_z) * 1.5f - 0.75f;
-		z = gl->points[i];
-		i++;
-		prev_x = x;
-		prev_y = y;
-		prev_z = z;
-	}
-}
-
 void						gl_scale_tris(t_gl *gl, float3 max, float3 min)
 {
 	uint 					i;
-	uint 					num_points;
 	float					delta_x;
 	float					delta_y;
 	float 					delta_z;
-	float 					x;
-	float 					y;
-	float 					z;
-	float 					prev_x;
-	float 					prev_y;
-	float					prev_z;
 
 	i = 0;
-	prev_x = 0;
-	prev_y = 0;
-	prev_z = 0;
-	num_points = gl->num_tris * 3 * 3;
 	if (!(delta_x = (float)(max.x - min.x)))
 		delta_x = 1.0f;
 	if (!(delta_y = (float)(max.y - min.y)))
 		delta_y = 1.0f;
 	if (!(delta_z = (float)(max.z - min.z)))
 		delta_z = 1.0f;
-	while (i < num_points)
+	while (i < gl->num_tris)
 	{
 		gl->tris[i] = ((gl->tris[i] - (float)min.x) / delta_x) * 1.5f - 0.75f;
-		x = gl->tris[i];
 		i++;
 		gl->tris[i] = ((gl->tris[i] - (float)min.y) / delta_y) * 1.5f - 0.75f;
-		y = gl->tris[i];
 		i++;
 		gl->tris[i] = ((gl->tris[i] - (float)min.z) / delta_z) * 1.5f - 0.75f;
-		z = gl->tris[i];
 		i++;
-		prev_x = x;
-		prev_y = y;
-		prev_z = z;
 	}
 }

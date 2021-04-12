@@ -24,8 +24,6 @@
 #include "morphosis.h"
 
 //TODO SICK now export as obj
-
-//TODO get rid of points arr, work with triangles only
 int 						main(void)
 {
 	t_data 					*data;
@@ -33,8 +31,6 @@ int 						main(void)
 	data = init_data();
 
 	calculate_point_cloud(data);
-
-	gl_retrieve_points(data);
 	gl_retrieve_tris(data);
 
 	run_graphics(data->gl, data->fract->p1, data->fract->p0);

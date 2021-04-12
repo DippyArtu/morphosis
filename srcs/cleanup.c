@@ -27,8 +27,6 @@ void 						clean_fract(t_fract *fract)
 
 void						clean_gl(t_gl *gl)
 {
-	if (gl->points)
-		free(gl->points);
 	if (gl->matrix)
 		free(gl->matrix);
 	if (gl->tris)

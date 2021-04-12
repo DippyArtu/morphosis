@@ -59,7 +59,7 @@ void						define_voxel(t_fract *fract, float s)
 			fract->voxel[n].dx = xx[j];
 			fract->voxel[n].dy = yy[j];
 			fract->voxel[n].dz = zz[i];
-			n ++;
+			n++;
 		}
 	}
 }
