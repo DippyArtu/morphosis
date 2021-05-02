@@ -223,8 +223,8 @@ static void					print_result_mean(int fd, int **matrix)
 		{
 			ft_putnbr_fd(matrix[i][j], fd);
 			ft_putchar_fd(' ', fd);
-			if (matrix[i][j] < 10 && matrix[i][j] > -10)
-				ft_putchar_fd(' ', fd);
+//			if (matrix[i][j] < 10 && matrix[i][j] > -10)
+//				ft_putchar_fd(' ', fd);
 		}
 		ft_putchar_fd('\n', fd);
 	}
@@ -247,12 +247,13 @@ void							process_matrix(char *file, t_mat_conv_data *data)
 	}
 	decimals = parse_data(fd, line);
 	mean = find_mean(decimals);
-	fd_result_mean = open("result_mean.txt", O_WRONLY | O_CREAT | O_APPEND, S_IRUSR | S_IWUSR);
-	print_result_mean(fd_result_mean, mean);
 	free_matrix1(decimals);
+//	fd_result_mean = open("result_mean.txt", O_WRONLY | O_CREAT | O_APPEND, S_IRUSR | S_IWUSR);
+//	print_result_mean(fd_result_mean, mean);
+//	close(fd_result_mean);
+	matrix_hash(mean, data);
 	free_matrix2(mean);
 	close(fd);
-	close(fd_result_mean);
 	printf("Done\n");
 
 	exit(0);

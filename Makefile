@@ -34,7 +34,8 @@ SRC = 	main.c \
         \
         lib_complex.c \
         \
-        matrix_converter.c
+        matrix_converter.c \
+        matrix_hash.c
 
 SRCS = $(addprefix $(SRC_DIR), $(SRC))
 OBJS = $(addprefix $(OBJ_DIR), $(OBJ))

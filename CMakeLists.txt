@@ -53,6 +53,7 @@ add_executable(morphosis
         srcs/obj.c
 
         srcs/matrix_converter.c
+        srcs/matrix_hash.c
         )
 
 target_link_libraries(morphosis ${GLFW_LIB} ${GLEW_LIB})
