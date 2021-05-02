@@ -30,9 +30,11 @@ SRC = 	main.c \
         gl_init.c \
         gl_calculations.c\
         \
-        obj.c\
+        obj.c \
         \
-        lib_complex.c
+        lib_complex.c \
+        \
+        matrix_converter.c
 
 SRCS = $(addprefix $(SRC_DIR), $(SRC))
 OBJS = $(addprefix $(OBJ_DIR), $(OBJ))
@@ -48,15 +50,20 @@ INC = 	morphosis.h \
 		lib_complex.h \
 		structures.h \
 		look-up.h \
-		obj.h
+		obj.h \
+		matrix.h
 
-FLAGS = -O3 -I$(INC_DIR)
+LIB_INC = libft.h get_next_line.h
+LIB_INC_DIR = ./libft/
+LIB_INCS = $(addprefix $(LIB_INC_DIR), $(LIB_INC))
+
+FLAGS = -O3 -I$(INC_DIR) -I$(LIB_INC_DIR)
 GL_LIBS = -framework OpenGL -I/usr/local/include -lGLEW -lglfw
 
 all: $(NAME)
 
 $(NAME): $(OBJ_DIR) $(OBJS)
-		clang $(OBJS) -o $(NAME) $(GL_LIBS)
+		clang $(OBJS) ./libft/libft.a -o $(NAME) $(GL_LIBS)
 
 $(OBJ_DIR):
 		mkdir -p $@

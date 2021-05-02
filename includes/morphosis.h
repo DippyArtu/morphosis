@@ -19,10 +19,10 @@
 # include <gl_includes.h>
 # include <errors.h>
 # include <obj.h>
+# include <matrix.h>
 
 # define OUTPUT_FILE "./fractal.obj"
 # define OUTPUT_PRECISION 3
-
 
 //---------------------------------------------------------------------------------------------------------------------- init.c
 t_data						*init_data(void);

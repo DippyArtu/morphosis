@@ -18,10 +18,9 @@
 
 /*
  * OBJ lib: https://github.com/rlk/obj
- *
  */
 
-//TODO OpenCL
+//TODO OpenCL?
 #include "morphosis.h"
 
 static t_data 						*get_args(int argv, char **argc)
@@ -29,15 +28,24 @@ static t_data 						*get_args(int argv, char **argc)
 	t_data					*data;
 	float 					s_size;
 	float4 					q;
+	t_mat_conv_data			mat;
 
 	data = NULL;
 	if (argv == 1)
 		error(NO_ARG_ERR, NULL);
 	if (argv != 6)
 	{
-		if (argv == 2 && !(strcmp(argc[1], "def")))
+		if (argv == 2 && !(strcmp(argc[1], "-d")))
 		{
 			data = init_data();
+			return data;
+		}
+		else if (argv == 3 && !(strcmp(argc[1], "-m")))
+		{
+			data = init_data();
+			process_matrix(argc[2], &mat);
+			data->fract->step_size = mat.step_size;
+			data->fract->julia->c = mat.q;
 			return data;
 		}
 		error(ARGS_ERR, NULL);
@@ -58,9 +66,7 @@ static t_data 						*get_args(int argv, char **argc)
 int 						main(int argv, char **argc)
 {
 	t_data 					*data;
-	int 					export;
 
-	export = 0;
 	data = get_args(argv, argc);
 	calculate_point_cloud(data);
 	gl_retrieve_tris(data);

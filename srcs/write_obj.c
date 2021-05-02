@@ -25,6 +25,7 @@ void 						export_obj(t_data *data)
 	o = obj_create(NULL);
 	surface = obj_add_surf(o);
 	write_mesh(data, surface, o);
+	printf("SAVING-----\n");
 	obj_sort(o, 32);
 	obj_proc(o);
 	obj_write(o, OUTPUT_FILE, NULL, OUTPUT_PRECISION);
@@ -46,7 +47,7 @@ void						write_mesh(t_data *data, int surface, obj *o)
 	i = 0;
 	while (i < data->gl->num_tris)
 	{
-		printf("Written: %.3f\n", (((float)i / data->gl->num_tris) * 100));
+		printf("Written: %.3f %%\n", (((float)i / data->gl->num_tris) * 100));
 		polygon = obj_add_poly(o, surface);
 		for (int v = 0; v < 3; v++)
 		{
