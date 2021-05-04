@@ -47,13 +47,6 @@ static t_data 						*get_args(int argv, char **argc)
 			data = init_data();
 			data->fract->step_size = mat.step_size;
 			data->fract->julia->c = mat.q;
-
-			printf("%f\n", data->fract->julia->c.x);
-			printf("%f\n", data->fract->julia->c.y);
-			printf("%f\n", data->fract->julia->c.z);
-			printf("%f\n", data->fract->julia->c.w);
-			exit(0);
-
 			return data;
 		}
 		error(ARGS_ERR, NULL);
@@ -80,6 +73,10 @@ int 						main(int argv, char **argc)
 	gl_retrieve_tris(data);
 	clean_calcs(data);
 
+//	if (data->fract->step_size > 0.005)
+//		run_graphics(data->gl, data->fract->p1, data->fract->p0);
+//	else if (data->fract->step_size == 0.005)
+//		data->gl->export = 1;
 	run_graphics(data->gl, data->fract->p1, data->fract->p0);
 	if (data->gl->export)
 	{

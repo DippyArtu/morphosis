@@ -28,6 +28,7 @@ static int						count_set_bits(int byte)
  * This function receives 8 bytes
  * 1st byte used to generate a sign
  * 2nd for the whole part (it can be either 0 or 1, because numbers have to be in -2 < x < 2 range)
+ * 			I've decided to skip it and keep everything at 0 for better results
  * remaining 6 for mantissa (decimal places) — can output numbers 0-8 to keep away from range limits
  */
 static float 					generate_number(uint *bytes)
@@ -41,8 +42,8 @@ static float 					generate_number(uint *bytes)
 	mantissa = 0;
 	if (count_set_bits(bytes[0]) >= 4)
 		negative = 1;
-	if (count_set_bits(bytes[1]) >= 4)
-		res = 1;
+//	if (count_set_bits(bytes[1]) >= 4)
+//		res = 1;
 	for (int i = 2; i < 8; i++)
 	{
 		mantissa += (float)count_set_bits(bytes[i]);

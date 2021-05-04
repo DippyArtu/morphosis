@@ -10,8 +10,6 @@
 
 #include "morphosis.h"
 
-//TODO comments
-
 void 						run_graphics(t_gl *gl, float3 max, float3 min)
 {
 	gl_scale_tris(gl, max, min);
