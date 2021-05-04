@@ -14,6 +14,7 @@
  * - GLFW
  * - GLEW
  * - CGLM | docs: https://cglm.readthedocs.io/en/latest/
+ * - OpenSSL
  */
 
 /*
@@ -42,10 +43,17 @@ static t_data 						*get_args(int argv, char **argc)
 		}
 		else if (argv == 3 && !(strcmp(argc[1], "-m")))
 		{
-			data = init_data();
 			process_matrix(argc[2], &mat);
+			data = init_data();
 			data->fract->step_size = mat.step_size;
 			data->fract->julia->c = mat.q;
+
+			printf("%f\n", data->fract->julia->c.x);
+			printf("%f\n", data->fract->julia->c.y);
+			printf("%f\n", data->fract->julia->c.z);
+			printf("%f\n", data->fract->julia->c.w);
+			exit(0);
+
 			return data;
 		}
 		error(ARGS_ERR, NULL);

@@ -10,64 +10,43 @@
 
 #include "morphosis.h"
 
-static void					read_matrix(int **matrix)
+static void 					ft_itoa(int num, char *str)
 {
+	if (!str)
+		return;
+	sprintf(str, "%d", num);
+}
+
+static char						*matrix_to_string(int **matrix)
+{
+	char 						*res;
+	char						tmp[4];
+
+	if (!(res = (char *)malloc(STR_BUFFER * sizeof(char))))
+		error(MALLOC_FAIL_ERR, NULL);
+	bzero(res, STR_BUFFER);
 	for (int i = 0; i < 6; i++)
 	{
 		for (int j = 0; j < 6; j++)
 		{
-			printf("%i ", matrix[i][j]);
+			bzero(tmp, 4);
+			ft_itoa(matrix[i][j], tmp);
+			res = strcat(res, tmp);
 		}
-		printf("\n");
 	}
+	return res;
 }
 
-const uint32_t  MOD_ADLER = 65521;
-
-uint32_t 						adler32(unsigned char *data, size_t len)
-{
-	uint32_t 					a;
-	uint32_t 					b;
-	size_t 						index;
-
-	a = 1;
-	b = 0;
-	for (index = 0; index < len; ++index)
-	{
-		a = (a + data[index]) % MOD_ADLER;
-		b = (b + a) % MOD_ADLER;
-	}
-	return (b << 16) | a;
-}
-
-//6*6 matrix
+// convert matrix to string
+// get SHA-256 hash
+// divide hash bytes into 4 groups of 8 bytes — each group per coordinate
 void 							matrix_hash(int **matrix, t_mat_conv_data *data)
 {
-	//read_matrix(matrix);
-	uint32_t 					checksum;
+	char 						*mat_string;
+	unsigned char 				*hash;
 
-	size_t 						size = 6;
-//	int 						mat[] =
-//		{
-//		34, 41, 40, 36, 48, 41,
-//		16, 31, 45, 51, 47, 33,
-//		15, 39, 28, 35, 45, 48,
-//		36, 32, 57, 46, 42, 47,
-//		60, 46, 62, 59, 51, 26,
-//		55, 57, 45, 49, 25, 21
-//		};
-
-	//1835014
-	int 						mat[] =
-		{
-		3, 3, 1,
-		3, 3, 8
-		};
-
-//	for (size_t i = 0; i < size; i++)
-//		printf("%i ", mat[i]);
-//	printf("\n");
-	checksum = 0;
-	checksum = adler32((unsigned char *)mat, size);
-	printf("%u\n", checksum);
+	mat_string = matrix_to_string(matrix);
+	hash = SHA256((const unsigned char *)mat_string, strlen(mat_string), 0);
+	free(mat_string);
+	get_coords_from_hash(hash, data);
 }

@@ -214,22 +214,6 @@ static int					**find_mean(int	***matrix)
 	return(mean);
 }
 
-static void					print_result_mean(int fd, int **matrix)
-{
-	ft_putchar_fd('\n', fd);
-	for (int i = 0; i < 6; i++)
-	{
-		for (int j = 0; j < 6; j++)
-		{
-			ft_putnbr_fd(matrix[i][j], fd);
-			ft_putchar_fd(' ', fd);
-//			if (matrix[i][j] < 10 && matrix[i][j] > -10)
-//				ft_putchar_fd(' ', fd);
-		}
-		ft_putchar_fd('\n', fd);
-	}
-}
-
 void							process_matrix(char *file, t_mat_conv_data *data)
 {
 	int						fd;
@@ -241,20 +225,12 @@ void							process_matrix(char *file, t_mat_conv_data *data)
 	decimals = NULL;
 	mean = NULL;
 	if ((fd = open(file, O_RDONLY)) < 0)
-	{
-		printf("Failed to open the file for reading\n");
-		exit(0);
-	}
+		error(OPEN_FILE_ERR, NULL);
 	decimals = parse_data(fd, line);
 	mean = find_mean(decimals);
 	free_matrix1(decimals);
-//	fd_result_mean = open("result_mean.txt", O_WRONLY | O_CREAT | O_APPEND, S_IRUSR | S_IWUSR);
-//	print_result_mean(fd_result_mean, mean);
-//	close(fd_result_mean);
 	matrix_hash(mean, data);
 	free_matrix2(mean);
 	close(fd);
-	printf("Done\n");
-
-	exit(0);
+	printf("Matrix processed\n");
 }

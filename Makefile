@@ -35,7 +35,8 @@ SRC = 	main.c \
         lib_complex.c \
         \
         matrix_converter.c \
-        matrix_hash.c
+        matrix_hash.c \
+        matrix_generate_coordinates.c
 
 SRCS = $(addprefix $(SRC_DIR), $(SRC))
 OBJS = $(addprefix $(OBJ_DIR), $(OBJ))
@@ -59,12 +60,13 @@ LIB_INC_DIR = ./libft/
 LIB_INCS = $(addprefix $(LIB_INC_DIR), $(LIB_INC))
 
 FLAGS = -O3 -I$(INC_DIR) -I$(LIB_INC_DIR)
-GL_LIBS = -framework OpenGL -I/usr/local/include -lGLEW -lglfw
+GL_LIBS = -framework OpenGL -lGLEW -lglfw -I/usr/local/include
+OPENSSL_LIB = -lssl -lcrypto -L/usr/local/opt/openssl@1.1/lib -I/usr/local/opt/openssl@1.1/include
 
 all: $(NAME)
 
 $(NAME): $(OBJ_DIR) $(OBJS)
-		clang $(OBJS) ./libft/libft.a -o $(NAME) $(GL_LIBS)
+		clang $(OBJS) ./libft/libft.a -o $(NAME) $(GL_LIBS) $(OPENSSL_LIB)
 
 $(OBJ_DIR):
 		mkdir -p $@
