@@ -92,8 +92,10 @@ static int					bin_to_dec(char *bin)
 
 	for (int i = 0; i < 6; i++)
 	{
+		if (bin[i] != '1' && bin[i] != '0')
+			error(BAD_FILE_ERR, NULL);
 		binary[i] = bin[i] - 48;
-		res = res + (binary[i] * pow(2, pwr));
+		res = res + (int)(binary[i] * pow(2, pwr));
 		pwr--;
 	}
 	return(res);
@@ -132,13 +134,16 @@ static int					***parse_data(int fd, char *line)
 	char					*bin;
 	int						***matrix;
 	int						nbr;
+	int						line_num_valid;
 
 	int 					c_t = 0;
 	int						dim = 0;
 
 	matrix = alloc_matrix1();
+	line_num_valid = 0;
 	while ((get_next_line(fd, &line)))
 	{
+		line_num_valid++;
 		line_c = 0;
 		while (line[line_c])
 		{
@@ -174,6 +179,8 @@ static int					***parse_data(int fd, char *line)
 	}
 	free(line);
 	line = NULL;
+	if (line_num_valid != 36)
+		error(BAD_FILE_ERR, NULL);
 	return(matrix);
 }
 

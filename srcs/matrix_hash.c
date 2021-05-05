@@ -64,8 +64,10 @@ void 							matrix_hash(int **matrix, t_mat_conv_data *data)
 	free(mat_string);
 	get_coords_from_hash(hash, data);
 	print_res(data);
-	printf("Enter step size: ");
+	printf(ASK_SIZE);
 	fscanf(stdin, "%f", &data->step_size);
 	if (data->step_size < 0.00001 || data->step_size > 1)
-		error(GRID_ERR, NULL);
+		data->step_size = s_size_warning(data->step_size);
+	printf(ASK_ITER);
+	fscanf(stdin, "%d", &data->iter);
 }

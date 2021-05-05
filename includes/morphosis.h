@@ -34,6 +34,7 @@ void						init_vertex(t_data *data);
 
 //---------------------------------------------------------------------------------------------------------------------- errors.c
 void 						error(int errno, t_data *data);
+float						s_size_warning(float size);
 
 //---------------------------------------------------------------------------------------------------------------------- utils.c
 float3						**arr_float3_cat(float3 **f_from, float3 **f_to, uint2 *len);

@@ -28,6 +28,7 @@ static t_data 						*get_args(int argv, char **argc)
 {
 	t_data					*data;
 	float 					s_size;
+	int						iter;
 	float4 					q;
 	t_mat_conv_data			mat;
 
@@ -47,12 +48,17 @@ static t_data 						*get_args(int argv, char **argc)
 			data = init_data();
 			data->fract->step_size = mat.step_size;
 			data->fract->julia->c = mat.q;
+			data->fract->julia->max_iter = mat.iter;
 			return data;
 		}
 		error(ARGS_ERR, NULL);
 	}
 	if ((s_size = (float)strtod(argc[1], NULL)) < 0.00001 || s_size > 1)
-		error(GRID_ERR, NULL);
+		s_size = s_size_warning(s_size);
+
+	printf(ASK_ITER);
+	fscanf(stdin, "%d", &iter);
+
 	q.x = (float)strtod(argc[2], NULL);
 	q.y = (float)strtod(argc[3], NULL);
 	q.z = (float)strtod(argc[4], NULL);
@@ -61,6 +67,7 @@ static t_data 						*get_args(int argv, char **argc)
 
 	data->fract->step_size = s_size;
 	data->fract->julia->c = q;
+	data->fract->julia->max_iter = iter;
 	return data;
 }
 
@@ -73,10 +80,6 @@ int 						main(int argv, char **argc)
 	gl_retrieve_tris(data);
 	clean_calcs(data);
 
-//	if (data->fract->step_size > 0.005)
-//		run_graphics(data->gl, data->fract->p1, data->fract->p0);
-//	else if (data->fract->step_size == 0.005)
-//		data->gl->export = 1;
 	run_graphics(data->gl, data->fract->p1, data->fract->p0);
 	if (data->gl->export)
 	{

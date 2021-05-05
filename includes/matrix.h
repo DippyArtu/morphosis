@@ -19,6 +19,7 @@ typedef struct 					s_mat_conv_data
 {
 	float4 						q;
 	float 						step_size;
+	int							iter;
 }								t_mat_conv_data;
 
 //----------------------------------------------------------------------------------------------------------------------matrix_converter.c
