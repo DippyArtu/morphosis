@@ -71,3 +71,19 @@ void 							matrix_hash(int **matrix, t_mat_conv_data *data)
 	printf(ASK_ITER);
 	fscanf(stdin, "%d", &data->iter);
 }
+
+void 							matrix_hash2(char *matrix, t_mat_conv_data *data)
+{
+	unsigned char 				*hash;
+
+	hash = SHA256((const unsigned char *)matrix, strlen(matrix), 0);
+	free(matrix);
+	get_coords_from_hash(hash, data);
+	print_res(data);
+	printf(ASK_SIZE);
+	fscanf(stdin, "%f", &data->step_size);
+	if (data->step_size < 0.00001 || data->step_size > 1)
+		data->step_size = s_size_warning(data->step_size);
+	printf(ASK_ITER);
+	fscanf(stdin, "%d", &data->iter);
+}

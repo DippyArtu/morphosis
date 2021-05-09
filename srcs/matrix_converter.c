@@ -229,15 +229,30 @@ void							process_matrix(char *file, t_mat_conv_data *data)
 	int						***decimals;
 	int						**mean;
 
+	char					*matrix;
+	FILE 					*stream;
+
 	decimals = NULL;
 	mean = NULL;
-	if ((fd = open(file, O_RDONLY)) < 0)
-		error(OPEN_FILE_ERR, NULL);
-	decimals = parse_data(fd, line);
-	mean = find_mean(decimals);
-	free_matrix1(decimals);
-	matrix_hash(mean, data);
-	free_matrix2(mean);
-	close(fd);
+
+	if (MODE == 1)
+	{
+		if ((fd = open(file, O_RDONLY)) < 0)
+			error(OPEN_FILE_ERR, NULL);
+		decimals = parse_data(fd, line);
+		mean = find_mean(decimals);
+		free_matrix1(decimals);
+		matrix_hash(mean, data);
+		free_matrix2(mean);
+		close(fd);
+	}
+	else if (MODE == 2)
+	{
+		stream = fopen(file, "r");
+		matrix = read_matrix(stream);
+		fclose(stream);
+		matrix_hash2(matrix, data);
+	}
+
 	printf("Matrix processed\n");
 }
