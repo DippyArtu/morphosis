@@ -14,6 +14,8 @@
 # include <openssl/sha.h>
 
 # define STR_BUFFER 150
+# define MATRIX 1
+# define POEM 2
 
 // 1 (find mean matrix) or 2 (work with raw matrix)
 # define MODE 1
@@ -33,7 +35,10 @@ typedef struct 					s_mat_conv_data
 char							*read_matrix(FILE *stream);
 
 //----------------------------------------------------------------------------------------------------------------------matrix_converter.c
-void							process_matrix(char *file, t_mat_conv_data *data);
+void							process_matrix(char *file, t_mat_conv_data *data, int mode);
+void							free_matrix1(int ***m);
+int								***alloc_matrix1(void);
+void							fill_matrix(int **matrix, int number, int reset);
 
 //----------------------------------------------------------------------------------------------------------------------matrix_hash.c
 void 							matrix_hash(int **matrix, t_mat_conv_data *data);
@@ -41,5 +46,8 @@ void 							matrix_hash2(char *matrix, t_mat_conv_data *data);
 
 //----------------------------------------------------------------------------------------------------------------------matrix_generate_coordinates.c
 void 							get_coords_from_hash(unsigned char *hash, t_mat_conv_data *data);
+
+//----------------------------------------------------------------------------------------------------------------------poem.c
+int								***read_poem(FILE *stream);
 
 #endif

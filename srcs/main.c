@@ -21,7 +21,6 @@
  * OBJ lib: https://github.com/rlk/obj
  */
 
-//TODO OpenCL?
 #include "morphosis.h"
 
 static t_data 						*get_args(int argv, char **argc)
@@ -44,7 +43,16 @@ static t_data 						*get_args(int argv, char **argc)
 		}
 		else if (argv == 3 && !(strcmp(argc[1], "-m")))
 		{
-			process_matrix(argc[2], &mat);
+			process_matrix(argc[2], &mat, MATRIX);
+			data = init_data();
+			data->fract->step_size = mat.step_size;
+			data->fract->julia->c = mat.q;
+			data->fract->julia->max_iter = mat.iter;
+			return data;
+		}
+		else if (argv == 3 && !(strcmp(argc[1], "-p")))
+		{
+			process_matrix(argc[2], &mat, POEM);
 			data = init_data();
 			data->fract->step_size = mat.step_size;
 			data->fract->julia->c = mat.q;

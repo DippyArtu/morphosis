@@ -11,7 +11,7 @@
 #include <morphosis.h>
 #include <libft.h>
 
-static void					free_matrix1(int ***m)
+void							free_matrix1(int ***m)
 {
 	int						i;
 	int						j;
@@ -45,7 +45,7 @@ static void					free_matrix2(int **m)
 	m = NULL;
 }
 
-static int					***alloc_matrix1(void)
+int							***alloc_matrix1(void)
 {
 	int						***matrix;
 	int						i = 0;
@@ -101,7 +101,7 @@ static int					bin_to_dec(char *bin)
 	return(res);
 }
 
-static void					fill_matrix(int **matrix, int number, int reset)
+void						fill_matrix(int **matrix, int number, int reset)
 {
 	static int				row = 0;
 	static int				col = 0;
@@ -221,7 +221,7 @@ static int					**find_mean(int	***matrix)
 	return(mean);
 }
 
-void							process_matrix(char *file, t_mat_conv_data *data)
+void							process_matrix(char *file, t_mat_conv_data *data, int mode)
 {
 	int						fd;
 	int						fd_result_mean;
@@ -232,21 +232,35 @@ void							process_matrix(char *file, t_mat_conv_data *data)
 	char					*matrix;
 	FILE 					*stream;
 
+	int						processing_mode;
+
+	processing_mode = MODE;
 	decimals = NULL;
 	mean = NULL;
 
-	if (MODE == 1)
+	if (mode == POEM)
+		processing_mode = 1;
+	if (processing_mode == 1)
 	{
-		if ((fd = open(file, O_RDONLY)) < 0)
-			error(OPEN_FILE_ERR, NULL);
-		decimals = parse_data(fd, line);
+		if (mode == MATRIX)
+		{
+			if ((fd = open(file, O_RDONLY)) < 0)
+				error(OPEN_FILE_ERR, NULL);
+			decimals = parse_data(fd, line);
+			close(fd);
+		}
+		else if (mode == POEM)
+		{
+			stream = fopen(file, "r");
+			decimals = read_poem(stream);
+			fclose(stream);
+		}
 		mean = find_mean(decimals);
 		free_matrix1(decimals);
 		matrix_hash(mean, data);
 		free_matrix2(mean);
-		close(fd);
 	}
-	else if (MODE == 2)
+	else if (processing_mode == 2)
 	{
 		stream = fopen(file, "r");
 		matrix = read_matrix(stream);

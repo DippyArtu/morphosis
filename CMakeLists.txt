@@ -56,6 +56,7 @@ add_executable(morphosis
         srcs/matrix_hash.c
         srcs/matrix_generate_coordinates.c
         srcs/matrix_read.c
+        srcs/poem.c
         )
 
 target_link_libraries(morphosis ${GLFW_LIB} ${GLEW_LIB})

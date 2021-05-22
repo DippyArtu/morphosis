@@ -37,7 +37,8 @@ SRC = 	main.c \
         matrix_converter.c \
         matrix_hash.c \
         matrix_generate_coordinates.c \
-        matrix_read.c
+        matrix_read.c \
+        poem.c
 
 SRCS = $(addprefix $(SRC_DIR), $(SRC))
 OBJS = $(addprefix $(OBJ_DIR), $(OBJ))
